@@ -56,7 +56,7 @@ class Company extends Model
 
     public function packageUsages()
     {
-        return $this->hasMany('App\Models\PackageUsage', 'package_id');
+        return $this->hasMany('App\Models\PackageUsage', 'company_id');
     }
     public function users(){
         return $this->hasMany('App\Models\User');

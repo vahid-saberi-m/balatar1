@@ -17,4 +17,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('company', 'CompanyController');
+Route::apiResource('companies', 'CompanyController');
+Route::apiResource('packages', 'PackageController');
+Route::apiResource('packageUsages', 'PackageUsageController');
+Route::apiResource('events', 'EventController');
+Route::apiResource('CvFolders', 'CvFolderController');
+Route::apiResource('jobPosts', 'JobPostController');
+Route::apiResource('candidates', 'CandidateController');
+Route::apiResource('applications ', 'ApplicationController');
+Route::apiResource('users ', 'UserController');
+Route::apiResource('questions ', 'QuestionController');

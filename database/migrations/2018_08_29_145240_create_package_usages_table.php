@@ -17,10 +17,11 @@ class CreatePackageUsagesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('company_id');
             $table->unsignedInteger('package_id');
-            $table->integer('daily_cv_view')->nullable();
-            $table->integer('monthly_cv_view')->nullable();
-            $table->integer('active_job_post_count')->nullable();
-            $table->date('expiration_date')->nullable();//days
+            $table->integer('daily_cv_view_left')->nullable();
+            $table->integer('monthly_cv_view_left')->nullable();
+            $table->integer('active_job_post_left')->nullable();
+            $table->date('activates_at')->nullable();//days
+            $table->date('expires_at')->nullable();//days
             $table->timestamps();
 
             $table->foreign('company_id')->references('id')->on('companies');

@@ -11,10 +11,10 @@ $factory->define(App\Models\PackageUsage::class, function (Faker $faker) {
     return [
         'company_id'=>$company->id,
         'package_id'=>$package->id,
-        'daily_cv_view'=>$faker->numberBetween($min=0 , $max=$dailyCvView ),
-        'monthly_cv_view'=>$faker->numberBetween($min=$dailyCvView , $max=$package->monthly_cv_view ),
-        'active_job_post_count'=>$company->jobPosts->count(),
-        'expiration_date'=>$faker->dateTimeBetween($min='now', $max='+ 30 days')
+        'daily_cv_view_left'=>$faker->numberBetween($min=0 , $max=$dailyCvView ),
+        'monthly_cv_view_left'=>$faker->numberBetween($min=$dailyCvView , $max=$package->monthly_cv_view ),
+        'active_job_post_left'=>$company->jobPosts->count
+        'expires_at'=>$faker->dateTimeBetween($min='now', $max='+ 30 days')
     ];
 });
 

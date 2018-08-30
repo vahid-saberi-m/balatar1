@@ -9,10 +9,10 @@ class PackageUsage extends Model
     protected $fillable=[
         'company_id',
         'package_id',
-        'daily_cv_view',
-        'monthly_cv_view',
-        'active_job_post_count',
-        'expiration_date'
+        'daily_cv_view_left',
+        'monthly_cv_view_left',
+        'active_job_post_left',
+        'expires_at'
     ];
     public function company()
     {

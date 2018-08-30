@@ -21,16 +21,13 @@ class DatabaseSeeder extends Seeder
             $company->events()->save(factory(\App\Models\Event::class)->make());
         });
         foreach ($companies as $company)
-            if ($company->id > 3){
-                dd($company->id,$company->package_id );
-            }
-            else{
+
 
         $company->packageUsages()->save(factory(\App\Models\PackageUsage::class)->make([
                 'company_id'=>$company->id,
                 'package_id'=>$company->package_id
             ]));
-            }
+
         factory(App\Models\EventPicture::class,20)->create();
 
         factory(JobPost::class, 70)->create()->each(function ($jobPost) {
