@@ -1,7 +1,6 @@
 <?php
 
 use Faker\Generator as Faker;
-use Faker\Provider\fa_IR;
 
 $factory->define(\App\Models\Company::class, function (Faker $faker) {
         return [
