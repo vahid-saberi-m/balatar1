@@ -19,10 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::apiResource('companies', 'CompanyController');
 Route::apiResource('packages', 'PackageController');
-Route::apiResource('packageUsages', 'PackageUsageController');
+Route::apiResource('packageusages', 'PackageUsageController');
 Route::apiResource('events', 'EventController');
-Route::apiResource('CvFolders', 'CvFolderController');
-Route::apiResource('jobPosts', 'JobPostController');
+Route::apiResource('cvfolders', 'CvFolderController');
+Route::apiResource('jobposts', 'JobPostController');
 Route::apiResource('candidates', 'CandidateController');
 Route::apiResource('applications ', 'ApplicationController');
 Route::apiResource('users ', 'UserController');

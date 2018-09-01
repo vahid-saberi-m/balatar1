@@ -17,9 +17,10 @@ class CompanyPolicy
      * @param Company $company
      * @return mixed
      */
-    public function view(User $user, Company $company)
+    public function view(/*User $user,*/ Company $company)
     {
-        return true/*$user == null || $user->id == $company->user_id*/;
+//        if ($company)
+        return true /*$user == null || $user->id == $company->user_id*/;
     }
 
     /**

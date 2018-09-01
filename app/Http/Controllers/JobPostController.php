@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\JobPost;
 use Illuminate\Http\Request;
+use App\Repositories\JobPostRepository;
+
 
 class JobPostController extends Controller
 {
+    private $jobPostRepository;
+
+    public function __construct(JobPostRepository $jobPostRepository)
+    {
+        $this->jobPostRepository=$jobPostRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,7 +45,8 @@ class JobPostController extends Controller
      */
     public function show(JobPost $jobPost)
     {
-        //
+        $this->authorize('view', $jobPost);
+
     }
 
     /**

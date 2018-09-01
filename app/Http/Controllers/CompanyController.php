@@ -9,6 +9,10 @@ use App\Http\Resources\Company as CompanyResource ;
 use App\Models\Company;
 
 
+/**
+ * @property CompanyRepository company
+ * @property CompanyRepository companies
+ */
 class CompanyController extends Controller
 {
     /**
@@ -18,17 +22,17 @@ class CompanyController extends Controller
 
     /**
      * CompanyController constructor.
-     * @param CompanyRepository $companyRepository
+     * @param CompanyRepository $companies
      */
-    public function __construct(CompanyRepository $companyRepository)
+    public function __construct(CompanyRepository $companies)
     {
-        $this->companyRepository = $companyRepository;
+        $this->companies = $companies;
     }
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     *\
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
@@ -39,21 +43,13 @@ class CompanyController extends Controller
         return CompanyResource::collection($companies);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(Request $request)
     {
@@ -64,7 +60,8 @@ class CompanyController extends Controller
      * Display the specified resource.
      *
      * @param Company $company
-     * @return CompanyResource
+     * @return Company
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show(Company $company)
     {
@@ -73,23 +70,13 @@ class CompanyController extends Controller
         return $this->companyRepository->show($company);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
+     * @return CompanyResource
      */
     public function update(Request $request, $id)
     {
