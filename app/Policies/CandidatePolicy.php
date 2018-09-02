@@ -13,8 +13,8 @@ class CandidatePolicy
     /**
      * Determine whether the user can view the candidate.
      *
-     * @param  \App\User  $user
-     * @param  \App\Candidate  $candidate
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Candidate  $candidate
      * @return mixed
      */
     public function view(User $user, Candidate $candidate)
@@ -25,7 +25,7 @@ class CandidatePolicy
     /**
      * Determine whether the user can create candidates.
      *
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return mixed
      */
     public function create(User $user)
@@ -36,8 +36,8 @@ class CandidatePolicy
     /**
      * Determine whether the user can update the candidate.
      *
-     * @param  \App\User  $user
-     * @param  \App\Candidate  $candidate
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Candidate  $candidate
      * @return mixed
      */
     public function update(User $user, Candidate $candidate)
@@ -48,8 +48,8 @@ class CandidatePolicy
     /**
      * Determine whether the user can delete the candidate.
      *
-     * @param  \App\User  $user
-     * @param  \App\Candidate  $candidate
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Candidate  $candidate
      * @return mixed
      */
     public function delete(User $user, Candidate $candidate)
@@ -60,8 +60,8 @@ class CandidatePolicy
     /**
      * Determine whether the user can restore the candidate.
      *
-     * @param  \App\User  $user
-     * @param  \App\Candidate  $candidate
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Candidate  $candidate
      * @return mixed
      */
     public function restore(User $user, Candidate $candidate)
@@ -72,8 +72,8 @@ class CandidatePolicy
     /**
      * Determine whether the user can permanently delete the candidate.
      *
-     * @param  \App\User  $user
-     * @param  \App\Candidate  $candidate
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Candidate  $candidate
      * @return mixed
      */
     public function forceDelete(User $user, Candidate $candidate)

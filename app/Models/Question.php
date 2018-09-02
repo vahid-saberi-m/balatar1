@@ -5,6 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Class Question
+ * @package App\Models
+ * @property int company_id
+ * @property int job_post_id
+ * @property string question
+ * @property string answer_1
+ * @property boolean value_1
+ * @property string answer_2
+ * @property boolean value_2
+ * @property string answer_3
+ * @property boolean value_3
+ * @property string answer_4
+ * @property boolean value_4
+ */
 
 class Question extends Model
 {

@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\JobPost;
 use App\Models\User;
 use App\Models\Company;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -32,26 +33,27 @@ class CompanyPolicy
      */
     public function create(User $user)
     {
-        //
+
     }
 
     /**
      * Determine whether the user can update the company.
      *
-     * @param  \App\User  $user
-     * @param  \App\Company  $company
+     * @param  \App\Models\User $user
+     * @param  \App\Models\Company $company
+     * @param JobPost $jobPost
      * @return mixed
      */
-    public function update(User $user, Company $company)
+    public function update(User $user, Company $company, JobPost $jobPost)
     {
-        //
+        return $user->company_id == $company->id && ($user->role == 'admin' || $jobPost->user_id== $user->id );
     }
 
     /**
      * Determine whether the user can delete the company.
      *
-     * @param  \App\User  $user
-     * @param  \App\Company  $company
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Company  $company
      * @return mixed
      */
     public function delete(User $user, Company $company)
@@ -62,8 +64,8 @@ class CompanyPolicy
     /**
      * Determine whether the user can restore the company.
      *
-     * @param  \App\User  $user
-     * @param  \App\Company  $company
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Company  $company
      * @return mixed
      */
     public function restore(User $user, Company $company)
@@ -74,8 +76,8 @@ class CompanyPolicy
     /**
      * Determine whether the user can permanently delete the company.
      *
-     * @param  \App\User  $user
-     * @param  \App\Company  $company
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Company  $company
      * @return mixed
      */
     public function forceDelete(User $user, Company $company)

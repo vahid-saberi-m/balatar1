@@ -5,6 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Class Company
+ * @package App\Models
+ *
+ * @property int id
+ * @property int company_id
+ * @property int user_id
+ * @property string title
+ * @property string summary
+ * @property string description
+ * @property string requirements
+ * @property string benefits
+ * @property boolean approval
+ * @property string location
+ * @property Date publish_date
+ * @property int cv_views
+ * @property boolean is_active
+
+ *
+ */
+
 
 class JobPost extends Model
 {

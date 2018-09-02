@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JobPost;
 use App\Repositories\CompanyRepository;
 use App\Tools\ApiTrait;
 use Illuminate\Http\Request;
@@ -58,7 +59,7 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('create', [Company::class]);
+        $this->authorize('update', [Company::class]);
     }
 
     /**
@@ -70,7 +71,7 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        $this->authorizeApi('view', $company);
+//        $this->authorizeApi('view', $company);
 
         return $this->companyRepository->show($company);
     }
@@ -80,11 +81,11 @@ class CompanyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param JobPost $jobPost
      * @return int
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, JobPost $jobPost)
     {
 //        $company = $request->isMethod('PUT') ? Company::FindOrFail($id) : new Company();
 ////        $company->name= $request->input('company_name');
@@ -95,7 +96,10 @@ class CompanyController extends Controller
 //        }
 
 //        $this->authorize('view', Company::class, $id);
-        return $id;
+        $company = $jobPost->company;
+        $this->authorizeApi('update',$company, $jobPost );
+
+        return $jobPost;
 
     }
 

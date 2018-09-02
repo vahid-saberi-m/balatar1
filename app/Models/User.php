@@ -7,7 +7,18 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
+/**
+ * Class User
+ * @package App\Models
+ * @property int company_id
+ * @property string name
+ * @property string email
+ * @property string password
+ * @property string role
+ * @property string position
+ * @property string image
+ * @property boolean is_approved
+ */
 class User extends Authenticatable
 {
     use Notifiable;

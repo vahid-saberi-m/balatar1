@@ -5,6 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Class Application
+ * @package App\Models
+ * @property  'candidate_id',
+ * @property 'job_post_id',
+ * @property 'is_seen',
+ * @property 'cv_id',
+ * @property 'cv_folder_id'
+ */
 
 class Application extends Model
 {

@@ -10,6 +10,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @package App\Models
  *
  * @property JobPost jobPost
+ * @property string name
+ * @property int user_id
+ * @property int company_id
+ * @property int job_post_id
  */
 class CvFolder extends Model
 {

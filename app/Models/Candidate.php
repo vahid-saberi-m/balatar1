@@ -5,6 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Class Candidate
+ * @package App\Models
+ * @property int phone
+ * @property string email
+ * @property string name
+ * @property string company
+ * @property string position
+ * @property string experience
+ * @property string education
+ * @property string degree
+ * @property string university
+ */
 
 class Candidate extends Model
 {

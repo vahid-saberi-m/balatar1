@@ -4,6 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class PackageUsage
+ * @package App\Models
+ * @property int company_id',
+ * @property int package_id',
+ * @property int daily_cv_view_left',
+ * @property int monthly_cv_view_left',
+ * @property int active_job_post_left',
+ * @property date expires_at
+ */
+
 class PackageUsage extends Model
 {
     protected $fillable=[
