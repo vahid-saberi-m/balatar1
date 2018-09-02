@@ -17,16 +17,17 @@ class CompanyPolicy
      * @param Company $company
      * @return mixed
      */
-    public function view(/*User $user,*/ Company $company)
+    public function view(User $user, Company $company)
     {
 //        if ($company)
+
         return true /*$user == null || $user->id == $company->user_id*/;
     }
 
     /**
      * Determine whether the user can create companies.
      *
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return mixed
      */
     public function create(User $user)

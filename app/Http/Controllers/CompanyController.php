@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\CompanyRepository;
+use App\Tools\ApiTrait;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Resources\Company as CompanyResource ;
@@ -15,6 +16,8 @@ use App\Models\Company;
  */
 class CompanyController extends Controller
 {
+    use ApiTrait;
+
     /**
      * @var CompanyRepository
      */
@@ -22,11 +25,13 @@ class CompanyController extends Controller
 
     /**
      * CompanyController constructor.
-     * @param CompanyRepository $companies
+     * @param CompanyRepository $companyRepository
      */
-    public function __construct(CompanyRepository $companies)
+    public function __construct(CompanyRepository $companyRepository)
     {
-        $this->companies = $companies;
+        $this->companyRepository = $companyRepository;
+
+        $this->middleware('auth:api')->only(['store', 'update']);
     }
 
     /**
@@ -65,7 +70,7 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        $this->authorize('view', $company);
+        $this->authorizeApi('view', $company);
 
         return $this->companyRepository->show($company);
     }
@@ -76,17 +81,21 @@ class CompanyController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
-     * @return CompanyResource
+     * @return int
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(Request $request, $id)
     {
-        $company = $request->isMethod('PUT') ? Company::FindOrFail($id) : new Company();
-//        $company->name= $request->input('company_name');
-//        $company->company_size = $request->input('company_size');
+//        $company = $request->isMethod('PUT') ? Company::FindOrFail($id) : new Company();
+////        $company->name= $request->input('company_name');
+////        $company->company_size = $request->input('company_size');
+//
+//        if ($company->save()){
+//            return new CompanyResource($company);
+//        }
 
-        if ($company->save()){
-            return new CompanyResource($company);
-        }
+//        $this->authorize('view', Company::class, $id);
+        return $id;
 
     }
 
