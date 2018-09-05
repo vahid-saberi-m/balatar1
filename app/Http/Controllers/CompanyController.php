@@ -6,9 +6,10 @@ use App\Models\JobPost;
 use App\Repositories\CompanyRepository;
 use App\Tools\ApiTrait;
 use Illuminate\Http\Request;
-use App\Http\Requests;
+//use App\Http\Requests;
 use App\Http\Resources\Company as CompanyResource ;
 use App\Models\Company;
+
 
 
 /**
@@ -32,7 +33,7 @@ class CompanyController extends Controller
     {
         $this->companyRepository = $companyRepository;
 
-        $this->middleware('auth:api')->only(['store', 'update']);
+        $this->middleware('auth:api')->only(['store', 'update','destroy']);
     }
 
     /**
@@ -59,7 +60,10 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('update', [Company::class]);
+//        dd($request);
+        $this->authorizeApi('store',Company::class);
+        return $this->companyRepository->store($request);
+
     }
 
     /**
@@ -71,8 +75,6 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-//        $this->authorizeApi('view', $company);
-
         return $this->companyRepository->show($company);
     }
 
@@ -80,26 +82,15 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param Company $company
      * @param  \Illuminate\Http\Request $request
-     * @param JobPost $jobPost
-     * @return int
+     * @return Company
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(Request $request, JobPost $jobPost)
+    public function update(Company $company, Request $request )
     {
-//        $company = $request->isMethod('PUT') ? Company::FindOrFail($id) : new Company();
-////        $company->name= $request->input('company_name');
-////        $company->company_size = $request->input('company_size');
-//
-//        if ($company->save()){
-//            return new CompanyResource($company);
-//        }
-
-//        $this->authorize('view', Company::class, $id);
-        $company = $jobPost->company;
-        $this->authorizeApi('update',$company, $jobPost );
-
-        return $jobPost;
+        $this->authorizeApi('update', $company );
+        return $this->companyRepository->update($company,$request);
 
     }
 
@@ -109,8 +100,11 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy( Company $company)
     {
-        //
+//        dd(auth()->user()->name);
+        $this->authorizeApi('destroy', $company );
+       return $this->companyRepository->destroy($company);
+
     }
 }

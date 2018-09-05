@@ -16,9 +16,8 @@ trait ApiTrait
      *
      * @param  mixed $ability
      * @param  mixed|array $arguments
-     * @return \Illuminate\Auth\Access\Response
+     * @return void
      *
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function authorizeApi($ability, $arguments)
     {

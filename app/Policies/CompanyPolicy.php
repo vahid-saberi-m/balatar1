@@ -7,10 +7,16 @@ use App\Models\User;
 use App\Models\Company;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
+
 class CompanyPolicy
 {
     use HandlesAuthorization;
-
+    public function before($user, $ability)
+    {
+        if ($user->role=='super admin') {
+            return true;
+        }
+    }
     /**
      * Determine whether the user can view the company.
      *
@@ -31,9 +37,13 @@ class CompanyPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function store(User $user)
     {
-
+//        if ($user->company())
+//        {
+//            return false;
+//        }
+        return true;
     }
 
     /**
@@ -44,9 +54,9 @@ class CompanyPolicy
      * @param JobPost $jobPost
      * @return mixed
      */
-    public function update(User $user, Company $company, JobPost $jobPost)
+    public function update(User $user, Company $company)
     {
-        return $user->company_id == $company->id && ($user->role == 'admin' || $jobPost->user_id== $user->id );
+        return $user->company_id == $company->id && ($user->role == 'admin');
     }
 
     /**
@@ -56,9 +66,9 @@ class CompanyPolicy
      * @param  \App\Models\Company  $company
      * @return mixed
      */
-    public function delete(User $user, Company $company)
+    public function destroy (User $user, Company $company)
     {
-        //
+        return ($user->company_id == $company->id)&&$user->role=='admin';
     }
 
     /**
