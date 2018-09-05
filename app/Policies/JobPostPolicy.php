@@ -2,13 +2,20 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\JobPost;
+use App\Models\Company;
+use App\Models\User;
+use App\Models\JobPost;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class JobPostPolicy
 {
     use HandlesAuthorization;
+    public function before($user, $ability)
+    {
+        if ($user->role=='super admin') {
+            return true;
+        }
+    }
 
     /**
      * Determine whether the user can view the job post.
@@ -17,9 +24,10 @@ class JobPostPolicy
      * @param  \App\Models\JobPost  $jobPost
      * @return mixed
      */
-    public function view(User $user, JobPost $jobPost)
+    public function indexUser($company)
     {
-        return true;
+        $user=auth()->user();
+        return $user->company_id == $company->id;
     }
 
     /**

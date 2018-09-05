@@ -17,6 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('jobposts/indexpublic/{company}','JobPostController@indexPublic');
+Route::get('jobposts/indexuser/{company}','JobPostController@indexUser');
 Route::apiResource('companies', 'CompanyController');
 Route::apiResource('packages', 'PackageController');
 Route::apiResource('packageusages', 'PackageUsageController');

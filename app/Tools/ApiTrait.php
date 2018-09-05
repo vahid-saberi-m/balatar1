@@ -21,6 +21,7 @@ trait ApiTrait
      */
     public function authorizeApi($ability, $arguments)
     {
+//        dd($ability,$arguments);
         if (!request()->user('api')->can($ability, $arguments)) {
             abort(403, 'This action is unauthorized.');
         }

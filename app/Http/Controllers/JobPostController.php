@@ -3,17 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobPost;
+use App\Models\Company;
+use App\Tools\ApiTrait;
 use Illuminate\Http\Request;
 use App\Repositories\JobPostRepository;
 
 
+
 class JobPostController extends Controller
 {
+    use ApiTrait;
+
     private $jobPostRepository;
 
     public function __construct(JobPostRepository $jobPostRepository)
     {
         $this->jobPostRepository=$jobPostRepository;
+        $this->middleware('auth:api')->only(['store', 'update','destroy','indexUser']);
     }
 
     /**
@@ -21,10 +27,24 @@ class JobPostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function indexPublic(Company $company)
     {
-        //
+       return response()->json($this->jobPostRepository->indexPubic($company));
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexUser(Company $company)
+    {
+        $this->authorizeApi('indexUser',JobPost::class,$company);
+        return $this->jobPostRepository->indexUser($company);
+    }
+
+
+
 
     /**
      * Store a newly created resource in storage.

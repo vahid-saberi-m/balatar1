@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string email
  * @property integer phone_number
  * @property string location
+ * @property mixed jobPosts
  *
  */
 class Company extends Model

@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\JobPost;
 use App\Repositories\CompanyRepository;
 use App\Tools\ApiTrait;
 use Illuminate\Http\Request;
-//use App\Http\Requests;
 use App\Http\Resources\Company as CompanyResource ;
 use App\Models\Company;
 
