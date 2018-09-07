@@ -17,14 +17,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('jobposts/indexpublic/{company}','JobPostController@indexPublic');
-Route::get('jobposts/indexuser/{company}','JobPostController@indexUser');
 Route::apiResource('companies', 'CompanyController');
 Route::apiResource('packages', 'PackageController');
 Route::apiResource('packageusages', 'PackageUsageController');
 Route::apiResource('events', 'EventController');
 Route::apiResource('cvfolders', 'CvFolderController');
+Route::get('jobposts/{jobPost}/activate', 'JobPostController@activate');
 Route::apiResource('jobposts', 'JobPostController');
+Route::get('jobposts/indexpublic/{company}','JobPostController@indexPublic');
+Route::get('jobposts/indexuser/{company}','JobPostController@indexUser');
+Route::get('jobposts/{jobPost}/approval', 'JobPostController@approval');
 Route::apiResource('candidates', 'CandidateController');
 Route::apiResource('applications ', 'ApplicationController');
 Route::apiResource('users ', 'UserController');

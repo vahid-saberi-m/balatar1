@@ -3,10 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\CvFolder;
+use App\Models\JobPost;
+use App\Repositories\CvFolderRepository;
 use Illuminate\Http\Request;
+use App\Tools\ApiTrait;
 
+
+/**
+ * @property CvFolderRepository CvFolderRepository
+ */
 class CvFolderController extends Controller
 {
+    use ApiTrait;
+
+    private $jobPostRepository;
+
+    public function __construct(CvFolderRepository $cvFolderRepository)
+    {
+        $this->CvFolderRepository=$cvFolderRepository;
+        $this->middleware('auth:api');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -60,5 +76,10 @@ class CvFolderController extends Controller
     public function destroy(CvFolder $cvFolder)
     {
         //
+    }
+
+    public function createJobPostCvFolders(JobPost $jobPost)
+    {
+       return $this->CvFolderRepository->CreateJobPostCvFolders($jobPost);
     }
 }

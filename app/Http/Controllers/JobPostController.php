@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\JobPostRequest;
 use App\Models\JobPost;
 use App\Models\Company;
 use App\Tools\ApiTrait;
 use Illuminate\Http\Request;
 use App\Repositories\JobPostRepository;
-
+use App\Repositories\CvFolderRepository;
+use phpDocumentor\Reflection\Types\Array_;
 
 
 class JobPostController extends Controller
@@ -19,7 +21,7 @@ class JobPostController extends Controller
     public function __construct(JobPostRepository $jobPostRepository)
     {
         $this->jobPostRepository=$jobPostRepository;
-        $this->middleware('auth:api')->only(['store', 'update','destroy','indexUser']);
+        $this->middleware('auth:api')->only(['store', 'update','destroy','indexUser','store','approval','activate']);
     }
 
     /**
@@ -44,17 +46,29 @@ class JobPostController extends Controller
     }
 
 
-
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store( JobPostRequest $request)
     {
-        //
+//        $this->authorizeApi('store',array(JobPost::class, $request, $user=auth()->user()));
+        $validated=$request->validated();
+        return $this->jobPostRepository->store($request);
+    }
+
+    public function approval(JobPost $jobPost){
+        $this->authorizeApi('approval',$jobPost);
+        return $this->jobPostRepository->approval($jobPost);
+
+    }
+
+    public function activate(JobPost $jobPost){
+
+        $this->authorizeApi('activate',$jobPost);
+        return $this->jobPostRepository->activate($jobPost);
     }
 
     /**
@@ -76,9 +90,11 @@ class JobPostController extends Controller
      * @param  \App\Models\JobPost  $jobPost
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, JobPost $jobPost)
+    public function update(JobPostRequest $request, JobPost $jobPost)
     {
-        //
+        $this->authorizeApi('update',$jobPost,$request);
+        $this->$request->validated();
+        return $this->jobPostRepository->update($request,$jobPost);
     }
 
     /**

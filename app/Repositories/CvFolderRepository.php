@@ -1,0 +1,34 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: vahid
+ * Date: 9/7/2018
+ * Time: 6:42 AM
+ */
+namespace App\Repositories;
+
+use App\Models\Company;
+use App\Models\CvFolder;
+use App\Models\JobPost;
+use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+
+
+class CvFolderRepository
+{
+    public function CreateJobPostCvFolders(JobPost $jobPost)
+    {
+        $cvFolderNames=['مردود','در صف انتظار','قابل تامل','دعوت به مصاحبه'];
+        foreach ($cvFolderNames as $cvFolderName){
+            CvFolder::create([
+                'name'=>$cvFolderName,
+                'user_id'=>auth()->user()->id,
+                'job_post_id'=>$jobPost->id,
+                'company_id'=>$jobPost->company_id
+            ]);
+        }
+        return response()->json($jobPost);
+    }
+
+
+}
