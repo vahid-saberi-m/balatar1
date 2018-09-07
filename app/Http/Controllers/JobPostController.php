@@ -90,10 +90,10 @@ class JobPostController extends Controller
      * @param  \App\Models\JobPost  $jobPost
      * @return \Illuminate\Http\Response
      */
-    public function update(JobPostRequest $request, JobPost $jobPost)
+    public function update(JobPost $jobPost,JobPostRequest $request)
     {
-        $this->authorizeApi('update',$jobPost,$request);
-        $this->$request->validated();
+        $this->authorizeApi('update',$jobPost);
+        $request->validated();
         return $this->jobPostRepository->update($request,$jobPost);
     }
 
