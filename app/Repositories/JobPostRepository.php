@@ -110,4 +110,9 @@ class JobPostRepository
         ]);
         return $jobPost;
     }
+
+    public function delete(JobPost $jobPost){
+        $jobPost->delete();
+        return'deleted';
+    }
 }

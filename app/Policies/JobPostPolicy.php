@@ -78,7 +78,7 @@ class JobPostPolicy
      */
     public function delete(User $user, JobPost $jobPost)
     {
-        //
+        return ($jobPost->user_id==$user->id)||(($user->company_id==$jobPost->company_id)&&($user->role=='admin'));
     }
 
     /**

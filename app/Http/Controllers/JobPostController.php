@@ -21,7 +21,7 @@ class JobPostController extends Controller
     public function __construct(JobPostRepository $jobPostRepository)
     {
         $this->jobPostRepository=$jobPostRepository;
-        $this->middleware('auth:api')->only(['store', 'update','destroy','indexUser','store','approval','activate']);
+        $this->middleware('auth:api')->only(['store', 'update','destroy','indexUser','store','approval','activate','update','delete']);
     }
 
     /**
@@ -105,6 +105,8 @@ class JobPostController extends Controller
      */
     public function destroy(JobPost $jobPost)
     {
-        //
+        $this->authorizeApi('delete',$jobPost);
+        return $this->jobPostRepository->delete($jobPost);
+
     }
 }
