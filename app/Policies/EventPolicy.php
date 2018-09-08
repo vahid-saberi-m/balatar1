@@ -2,13 +2,16 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\Event;
+use App\Models\User;
+use App\Models\Event;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class EventPolicy
 {
     use HandlesAuthorization;
+
+
+
 
     /**
      * Determine whether the user can view the event.
@@ -54,7 +57,7 @@ class EventPolicy
      */
     public function delete(User $user, Event $event)
     {
-        //
+        return auth()->user()->role=='admin';
     }
 
     /**

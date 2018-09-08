@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResource('companies', 'CompanyController');
 Route::apiResource('packages', 'PackageController');
 Route::apiResource('packageusages', 'PackageUsageController');
+Route::get('events/index-public/{company}', 'EventController@indexPublic');
 Route::apiResource('events', 'EventController');
 Route::apiResource('cvfolders', 'CvFolderController');
 Route::get('job-posts/{jobPost}/activate', 'JobPostController@activate');
