@@ -22,7 +22,7 @@ class CvFolderRepository
         foreach ($cvFolderNames as $cvFolderName){
             CvFolder::create([
                 'name'=>$cvFolderName,
-                'user_id'=>auth()->user()->id,
+                'user_id'=>$jobPost->user_id,
                 'job_post_id'=>$jobPost->id,
                 'company_id'=>$jobPost->company_id
             ]);
