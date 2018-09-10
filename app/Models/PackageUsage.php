@@ -31,6 +31,6 @@ class PackageUsage extends Model
     }
     public function package()
     {
-        return $this->belongsTo('App\Models\Package');
+        return $this->belongsTo('App\Models\Package','package_id');
     }
 }

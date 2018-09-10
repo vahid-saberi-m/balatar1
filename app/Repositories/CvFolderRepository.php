@@ -30,5 +30,15 @@ class CvFolderRepository
         return response()->json($jobPost);
     }
 
+    public function store(Request $request,JobPost $jobPost){
+      $cvFolder=  CvFolder::query()->create([
+            'name'=>$request->name,
+            'user_id'=>$jobPost->user_id,
+            'job_post_id'=>$jobPost->id,
+            'company_id'=>$jobPost->company_id
+        ]);
+      return $cvFolder->name;
+    }
+
 
 }

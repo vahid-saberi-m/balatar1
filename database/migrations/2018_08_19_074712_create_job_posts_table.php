@@ -28,7 +28,7 @@ class CreateJobPostsTable extends Migration
             $table->date('expiration_date');
             $table->date('publish_date');
             $table->boolean('is_active') ;
-            $table->integer('cv_views')->default('0');
+            $table->integer('cv_views')->default('20');
             $table->softDeletes();
 
             $table->foreign('company_id')->references('id')->on('companies');

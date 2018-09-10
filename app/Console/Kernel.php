@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Models\Company;
+use App\Models\PackageUsage;
 use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -42,6 +44,22 @@ class Kernel extends ConsoleKernel
             $expiredJobPost->update('is_active', 0);
         }})->
         daily();
+
+        $schedule->call(function (){
+           $packageUsages= PackageUsage::all();
+           foreach ($packageUsages as $packageUsage){
+             $dailyViews= $packageUsage->package()->daily_cv_view;
+             $packageUsage->update(['daily_cv_view_left'=>$dailyViews]);
+           }})
+            ->daily();
+
+        $schedule->call(function (){
+            $packageUsages= PackageUsage::all();
+            foreach ($packageUsages as $packageUsage){
+                $monthlyViews= $packageUsage->package()->monthly_cv_view;
+                $packageUsage->update(['monthly_cv_view_left'=>$monthlyViews]);
+            }})
+            ->monthly();
     }
 
     /**

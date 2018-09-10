@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CvFolderRequest;
 use App\Models\CvFolder;
 use App\Models\JobPost;
+use App\Models\User;
 use App\Repositories\CvFolderRepository;
 use Illuminate\Http\Request;
 use App\Tools\ApiTrait;
@@ -26,7 +28,15 @@ class CvFolderController extends Controller
 
     public function jobPostCvFolders(JobPost $jobPost)
     {
-       return $jobPost->cvFolders;
+        $this->authorizeApi('isCompanyJobPost', array(JobPost::class, $jobPost));
+        return $jobPost->cvFolders;
+    }
+
+    public function cvFolderApplications(CvFolder $cvFolder)
+    {
+        $jobPost = $cvFolder->jobPost;
+        $this->authorizeApi('isCompanyJobPost', array(JobPost::class, $jobPost));
+        return $cvFolder->applications()->paginate('10');
     }
 
     /**
@@ -45,9 +55,10 @@ class CvFolderController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CvFolderRequest $request, JobPost $jobPost)
     {
-        //
+        $this->authorizeApi('isCompanyJobPost', $jobPost);
+        return $this->CvFolderRepository->store($request, $jobPost);
     }
 
     /**
@@ -68,20 +79,26 @@ class CvFolderController extends Controller
      * @param  \App\Models\CvFolder $cvFolder
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CvFolder $cvFolder)
+    public function update(CvFolderRequest $request, CvFolder $cvFolder)
     {
-        //
+        $this->authorizeApi('isCompanyJobPost', $cvFolder->jobPost);
+        $cvFolder->update(['name' => $request->name]);
+        return $cvFolder;
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\CvFolder $cvFolder
-     * @return \Illuminate\Http\Response
+     * @return string
+     * @throws \Exception
      */
     public function destroy(CvFolder $cvFolder)
     {
-        //
+        $this->authorizeApi('isCompanyJobPost', $cvFolder->jobPost);
+        $cvFolder->applications()->delete();
+        $cvFolder->delete($cvFolder);
+        return 'deleted';
     }
 
     public function createJobPostCvFolders(JobPost $jobPost)

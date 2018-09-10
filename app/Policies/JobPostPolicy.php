@@ -19,6 +19,12 @@ class JobPostPolicy
         }
     }
 
+    public function isCompanyJobPost(User $user,JobPost $jobPost)
+    {
+        return ($jobPost->company_id==$user->company_id)&&(($user->role=='admin')||($user->id=$jobPost->user_id));
+
+    }
+
     /**
      * Determine whether the user can view the job post.
      *
@@ -38,17 +44,11 @@ class JobPostPolicy
      * @param Request $request
      * @return mixed
      */
-//    public function store(User $user,Request $request)
-//    {
-//        $date=new Carbon($request->publish_date);
-//        $expirationDate=new Carbon($request->expiration_date);
-////        dd($date);
-////        $user=auth()->user();
-//        return ($user->company_id == $request->company_id)
-//            &&($expirationDate->isAfter($date))
-//            &&($date->isAfter(now()))
-//            ;
-//    }
+    public function store(User $user,Request $request)
+    {
+        return ($user->company_id == $request->company_id);
+
+    }
 
     public function approval($jobPost){
         return (auth()->user()->company_id==$jobPost->company_id)&&(auth()->user()->role=='admin');
