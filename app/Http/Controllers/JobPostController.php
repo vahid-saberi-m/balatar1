@@ -20,8 +20,8 @@ class JobPostController extends Controller
 
     public function __construct(JobPostRepository $jobPostRepository)
     {
-        $this->jobPostRepository=$jobPostRepository;
-        $this->middleware('auth:api')->only(['store', 'update','destroy','indexUser','store','approval','activate','update','delete']);
+        $this->jobPostRepository = $jobPostRepository;
+        $this->middleware('auth:api')->only(['store', 'update', 'destroy', 'indexUser', 'store', 'approval', 'activate', 'update', 'delete']);
     }
 
     /**
@@ -31,7 +31,7 @@ class JobPostController extends Controller
      */
     public function indexPublic(Company $company)
     {
-       return response()->json($this->jobPostRepository->indexPubic($company));
+        return response()->json($this->jobPostRepository->indexPubic($company));
     }
 
     /**
@@ -41,7 +41,7 @@ class JobPostController extends Controller
      */
     public function indexUser(Company $company)
     {
-        $this->authorizeApi('indexUser',JobPost::class,$company);
+        $this->authorizeApi('indexUser', JobPost::class, $company);
         return $this->jobPostRepository->indexUser($company);
     }
 
@@ -49,32 +49,34 @@ class JobPostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store( JobPostRequest $request)
+    public function store(JobPostRequest $request)
     {
 //        $this->authorizeApi('store',array(JobPost::class, $request, $user=auth()->user()));
-        $validated=$request->validated();
+        $validated = $request->validated();
         return $this->jobPostRepository->store($request);
     }
 
-    public function approval(JobPost $jobPost){
-        $this->authorizeApi('approval',$jobPost);
+    public function approval(JobPost $jobPost)
+    {
+        $this->authorizeApi('approval', $jobPost);
         return $this->jobPostRepository->approval($jobPost);
 
     }
 
-    public function activate(JobPost $jobPost){
+    public function activate(JobPost $jobPost)
+    {
 
-        $this->authorizeApi('activate',$jobPost);
+        $this->authorizeApi('activate', $jobPost);
         return $this->jobPostRepository->activate($jobPost);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\JobPost  $jobPost
+     * @param  \App\Models\JobPost $jobPost
      * @return \Illuminate\Http\Response
      */
     public function show(JobPost $jobPost)
@@ -86,26 +88,26 @@ class JobPostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\JobPost  $jobPost
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Models\JobPost $jobPost
      * @return \Illuminate\Http\Response
      */
-    public function update(JobPost $jobPost,JobPostRequest $request)
+    public function update(JobPostRequest $request, JobPost $jobPost)
     {
-        $this->authorizeApi('update',$jobPost);
-        $request->validated();
-        return $this->jobPostRepository->update($request,$jobPost);
+        $this->authorizeApi('update', $jobPost);
+
+        return $this->jobPostRepository->update($request->all(), $jobPost);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\JobPost  $jobPost
+     * @param  \App\Models\JobPost $jobPost
      * @return \Illuminate\Http\Response
      */
     public function destroy(JobPost $jobPost)
     {
-        $this->authorizeApi('delete',$jobPost);
+        $this->authorizeApi('delete', $jobPost);
         return $this->jobPostRepository->delete($jobPost);
 
     }

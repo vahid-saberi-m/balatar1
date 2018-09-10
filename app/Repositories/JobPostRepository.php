@@ -56,10 +56,10 @@ class JobPostRepository
         ($cvView == null) ? $cvView = 10000 : $cvView;
         // adds maximum job post life time days to publish date if its still before declared expiration dates it will automatically change it to the limit day
         $jobPostLifetimeLimit = auth()->user()->company->package->job_post_lifetime_limit;
-        $publishDate=new Carbon($request->publish_date);
-        $expirationDate=new Carbon($request->expiration_date);
-        $limitDay=  $publishDate->addDays($jobPostLifetimeLimit);
-        (!$expirationDate->gt($limitDay))?:$expirationDate=$limitDay;
+        $publishDate = new Carbon($request->publish_date);
+        $expirationDate = new Carbon($request->expiration_date);
+        $limitDay = $publishDate->addDays($jobPostLifetimeLimit);
+        (!$expirationDate->gt($limitDay)) ?: $expirationDate = $limitDay;
         $jobPost = JobPost::create([
             'company_id' => auth()->user()->company_id,
             'user_id' => auth()->user()->id,
@@ -80,39 +80,39 @@ class JobPostRepository
 
     public function approval(JobPost $jobPost)
     {
-        $jobPost->update(array('approval'=> ($jobPost->approval == 0) ? 1 : 0));
+        $jobPost->update(array('approval' => ($jobPost->approval == 0) ? 1 : 0));
 
-        return $jobPost ;
+        return $jobPost;
     }
 
     public function activate(JobPost $jobPost)
     {
-     //activates jobPost and builds 4 basic CvFolders for it
-        $jobPost->update(array('is_active'=> ($jobPost->is_active == 0) ? 1 : 0));
+        //activates jobPost and builds 4 basic CvFolders for it
+        $jobPost->update(array('is_active' => ($jobPost->is_active == 0) ? 1 : 0));
         return app('App\Http\Controllers\CvFolderController')->createJobPostCvFolders($jobPost);
     }
-    public function update(JobPostRequest $request,JobPost $jobPost){
+
+    public function update(array $data, JobPost $jobPost)
+    {
         // adds maximum job post life time days to publish date if its still before declared expiration dates it will automatically change it to the limit day
         $jobPostLifetimeLimit = auth()->user()->company->package->job_post_lifetime_limit;
-        $publishDate=new Carbon($request->publish_date);
-        $expirationDate=new Carbon($request->expiration_date);
-        $limitDay=  $publishDate->addDays($jobPostLifetimeLimit);
-        (!$expirationDate->gt($limitDay))?:$expirationDate=$limitDay;
-        $jobPost ->update([
-            'title' => $request->title,
-            'summary' => $request->summary,
-            'description' => $request->description,
-            'requirements' => $request->requirements,
-            'benefits' => $request->benefits,
-            'location' => $request->location,
-            'publish_date' => $request->publish_date,
-            'expiration_date' => $expirationDate->toDateString(),
-        ]);
+        $publishDate = new Carbon($data['publish_date']);
+        $expirationDate = new Carbon($data['expiration_date']);
+        $limitDay = $publishDate->addDays($jobPostLifetimeLimit);
+        //(!$expirationDate->gt($limitDay))?:$expirationDate=$limitDay;
+        if ($expirationDate->gt($limitDay)) {
+            $expirationDate = $limitDay;
+        }
+        $data['expiration_date'] = $expirationDate->toDateString();
+
+        $jobPost->update($data);
+
         return $jobPost;
     }
 
-    public function delete(JobPost $jobPost){
+    public function delete(JobPost $jobPost)
+    {
         $jobPost->delete();
-        return'deleted';
+        return 'deleted';
     }
 }

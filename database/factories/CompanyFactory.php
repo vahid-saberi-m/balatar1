@@ -19,6 +19,7 @@ $factory->define(\App\Models\Company::class, function (Faker $faker) {
         'email'=>$faker->safeEmail,
         'phone_number'=>$faker->numberBetween(10,100),
         'location'=>$faker->city,
-            'package_id'=>$faker->randomElement(\App\Models\Package::all()->pluck('id')->toArray())
+            'package_id'=>$faker->randomElement(\App\Models\Package::all()->pluck('id')->toArray()),
+            'is_live'=>$faker->randomElement(['0','1'])
     ];
 });

@@ -31,6 +31,7 @@ class CreateCompaniesTable extends Migration
             $table->bigInteger('phone_number');
             $table->string('location')->nullable();
             $table->unsignedInteger('package_id');
+            $table->boolean('is_live')->default('0');
             $table->timestamps();
             $table->softDeletes();
 

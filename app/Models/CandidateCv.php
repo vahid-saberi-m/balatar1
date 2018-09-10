@@ -10,11 +10,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @package App\Models
  * @property int candidate_id
  * @property string cv
+ * @property string file_name
  */
 
 class CandidateCv extends Model
 {
-    protected $fillable = ['candidate_id','cv'];
+    protected $fillable = ['candidate_id','cv','file_name'];
 
     public function candidate(){
         return $this->belongsTo('App\Models\Candidate', 'candidate_id');

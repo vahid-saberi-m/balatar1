@@ -14,13 +14,14 @@ class EventRepository
     {
 //        $events=Event::where('company_id',$company->id)->orderByDesc('id')->take(10);
 
-        $events = $company->Events()->orderByDesc('id')->take(10);
-        return response()->json([$events]);
+        $events = $company->Events()->orderByDesc('id')->paginate(10);
+        return $events;
     }
 
     public function store(Request $request)
     {
-       $event= Event::create( [
+        /** @var Event $event */
+       $event= Event::query()->create( [
             'company_id'=>auth()->user()->company_id ,
             'title'=>$request->title,
             'content'=>$request->input('content'),

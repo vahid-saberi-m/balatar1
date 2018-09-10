@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Candidate
  * @package App\Models
+ * @property int id
  * @property int phone
  * @property string email
  * @property string name
