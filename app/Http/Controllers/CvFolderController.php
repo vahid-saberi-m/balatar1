@@ -20,9 +20,15 @@ class CvFolderController extends Controller
 
     public function __construct(CvFolderRepository $cvFolderRepository)
     {
-        $this->CvFolderRepository=$cvFolderRepository;
+        $this->CvFolderRepository = $cvFolderRepository;
         $this->middleware('auth:api');
     }
+
+    public function jobPostCvFolders(JobPost $jobPost)
+    {
+       return $jobPost->cvFolders;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,7 +42,7 @@ class CvFolderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -47,7 +53,7 @@ class CvFolderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\CvFolder  $cvFolder
+     * @param  \App\Models\CvFolder $cvFolder
      * @return \Illuminate\Http\Response
      */
     public function show(CvFolder $cvFolder)
@@ -58,8 +64,8 @@ class CvFolderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\CvFolder  $cvFolder
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Models\CvFolder $cvFolder
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, CvFolder $cvFolder)
@@ -70,7 +76,7 @@ class CvFolderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\CvFolder  $cvFolder
+     * @param  \App\Models\CvFolder $cvFolder
      * @return \Illuminate\Http\Response
      */
     public function destroy(CvFolder $cvFolder)
@@ -80,6 +86,6 @@ class CvFolderController extends Controller
 
     public function createJobPostCvFolders(JobPost $jobPost)
     {
-       return $this->CvFolderRepository->CreateJobPostCvFolders($jobPost);
+        return $this->CvFolderRepository->CreateJobPostCvFolders($jobPost);
     }
 }

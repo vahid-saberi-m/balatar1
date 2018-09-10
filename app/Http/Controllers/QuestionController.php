@@ -2,11 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JobPost;
 use App\Models\Question;
+use App\Repositories\QuestionRepository;
 use Illuminate\Http\Request;
 
 class questionController extends Controller
 {
+    private $questionRepository;
+    public function __construct(QuestionRepository $questionRepository)
+    {
+        $this->questionRepository=$questionRepository;
+    }
+
+    public function jobPostQuestions(JobPost $jobPost)
+   {
+       return $jobPost->questions()->get();
+   }
+
+   public function answerCheck(JobPost $jobPost,Request $request)
+   {
+    return  $this->questionRepository->answerCheck($request, $jobPost);
+   }
+
     /**
      * Display a listing of the resource.
      *
