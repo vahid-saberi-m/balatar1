@@ -20,10 +20,17 @@ use phpDocumentor\Reflection\Types\Array_;
 
 class JobPostRepository
 {
+    private $packageUsageRepository;
+    private $cvFolderRepository;
+    public function __construct(PackageUsageRepository $packageUsageRepository, CvFolderRepository $cvFolderRepository)
+    {
+        $this->packageUsageRepository = $packageUsageRepository;
+        $this->cvFolderRepository=$cvFolderRepository;
+    }
+
+
     public function show(JobPost $jobPost)
     {
-//        $jobPost->load(['jobPosts' => function($query) { $query->where('is_active', 1)->orderByDesc('id')->take(10);}]);
-
         return $jobPost;
     }
 
@@ -75,6 +82,7 @@ class JobPostRepository
             'cv_views' => $cvView,
             'is_active' => 0
         ]);
+        $this->cvFolderRepository->CreateJobPostCvFolders($jobPost);
         return $jobPost;
     }
 
@@ -87,9 +95,26 @@ class JobPostRepository
 
     public function activate(JobPost $jobPost)
     {
-        //activates jobPost and builds 4 basic CvFolders for it
-        $jobPost->update(array('is_active' => ($jobPost->is_active == 0) ? 1 : 0));
-        return app('App\Http\Controllers\CvFolderController')->createJobPostCvFolders($jobPost);
+        $company=$jobPost->company;
+        if ($jobPost->is_active==0){
+            $value=1;
+            $packageUsage=$this->packageUsageRepository->remainingJobPosts($company, $value);
+            if ($packageUsage){
+            $jobPost->update(array('is_active' => 1));
+            return 'فعال شد';
+            } else{
+                return 'شما حد اکثر فرصت های شغلی فعال بسته خود را مصرف نموده اید';
+            }
+        }
+        if ($jobPost->is_active==1)
+        {
+            $value=0;
+            $this->packageUsageRepository->remainingJobPosts($company, $value);
+            $jobPost->update(array('is_active' => 0));
+            return 'غیر فعال شد';
+        }
+
+
     }
 
     public function update(array $data, JobPost $jobPost)
@@ -99,7 +124,6 @@ class JobPostRepository
         $publishDate = new Carbon($data['publish_date']);
         $expirationDate = new Carbon($data['expiration_date']);
         $limitDay = $publishDate->addDays($jobPostLifetimeLimit);
-        //(!$expirationDate->gt($limitDay))?:$expirationDate=$limitDay;
         if ($expirationDate->gt($limitDay)) {
             $expirationDate = $limitDay;
         }

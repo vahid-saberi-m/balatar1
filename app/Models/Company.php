@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string email
  * @property integer phone_number
  * @property string location
+ * @property boolean is_live
  * @property mixed jobPosts
  *
  */
@@ -48,16 +49,17 @@ class Company extends Model
         'email',
         'phone_number',
         'location',
-        'package_id'
+        'package_id',
+        'is_live'
     ];
     public function package()
     {
         return $this->belongsTo('App\Models\Package', 'package_id');
     }
 
-    public function packageUsages()
+    public function packageUsage()
     {
-        return $this->hasMany('App\Models\PackageUsage', 'company_id');
+        return $this->hasOne('App\Models\PackageUsage', 'company_id');
     }
     public function users(){
         return $this->hasMany('App\Models\User');
