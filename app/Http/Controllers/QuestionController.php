@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\QuestionRequest;
+use App\Http\Resources\QuestionResource;
+use App\Http\Resources\QuestionCollection;
 use App\Models\JobPost;
 use App\Models\Question;
+use App\Tools\ApiTrait;
 use App\Repositories\QuestionRepository;
 use Illuminate\Http\Request;
 
 class questionController extends Controller
 {
+    use ApiTrait;
     private $questionRepository;
     public function __construct(QuestionRepository $questionRepository)
     {
@@ -17,7 +22,7 @@ class questionController extends Controller
 
     public function jobPostQuestions(JobPost $jobPost)
    {
-       return $jobPost->questions()->get();
+       return  QuestionResource::collection($jobPost->questions);
    }
 
    public function answerCheck(JobPost $jobPost,Request $request)
@@ -41,9 +46,10 @@ class questionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(QuestionRequest $request,JobPost $jobPost)
     {
-        //
+        $this->authorizeApi('isCompanyJobPost',$jobPost);
+        return $this->questionRepository->store($request,$jobPost);
     }
 
     /**
@@ -54,7 +60,7 @@ class questionController extends Controller
      */
     public function show(Question $question)
     {
-        //
+        return new QuestionResource($question);
     }
 
     /**

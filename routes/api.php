@@ -50,6 +50,9 @@ Route::post('applications/new-candidate/{job-post} ', 'ApplicationController@new
 
 Route::apiResource('users ', 'UserController');
 
+
 Route::get('job-post/questions/{jobPost} ', 'QuestionController@jobPostQuestions');
 Route::post('question/answer/{jobPost} ', 'QuestionController@answerCheck');
+Route::post('question/create/{jobPost} ', 'QuestionController@store');
+Route::get('questions/{question} ', 'QuestionController@show');
 Route::apiResource('questions ', 'QuestionController');
