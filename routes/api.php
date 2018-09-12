@@ -32,7 +32,7 @@ Route::group(['prefix' => 'job-post', 'as' => 'company.'], function () {
 });
 
 Route::group(['prefix' => 'event', 'as' => 'event.'], function () {
-    Route::apiResource('', 'eventController', ['parameters' => ['' => 'event']]);
+    Route::apiResource('', 'EventController', ['parameters' => ['' => 'event']]);
     Route::get('index-public/{company}', 'EventController@indexPublic');
 });
 
