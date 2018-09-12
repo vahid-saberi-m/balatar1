@@ -16,19 +16,19 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([PackagesTableSeeder::class]);
 
-        $companies=factory(App\Models\Company::class, 20)->create()->each(function ($company) {
+        $companies = factory(App\Models\Company::class, 20)->create()->each(function ($company) {
             $company->users()->save(factory(App\Models\User::class)->make());
             $company->events()->save(factory(\App\Models\Event::class)->make());
         });
         foreach ($companies as $company)
 
 
-        $company->packageUsages()->save(factory(\App\Models\PackageUsage::class)->make([
-                'company_id'=>$company->id,
-                'package_id'=>$company->package_id
+            $company->packageUsage()->save(factory(\App\Models\PackageUsage::class)->make([
+                'company_id' => $company->id,
+                'package_id' => $company->package_id
             ]));
 
-        factory(App\Models\EventPicture::class,20)->create();
+        factory(App\Models\EventPicture::class, 20)->create();
 
         factory(JobPost::class, 70)->create()->each(function ($jobPost) {
             $jobPost->cvFolders($jobPost)->save(factory(App\Models\CvFolder::class)->states('declined')->make(
