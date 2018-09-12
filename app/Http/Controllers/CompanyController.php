@@ -73,9 +73,8 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        if ($company->is_live==1){
         return $this->companyRepository->show($company);
-        }
+
     }
 
 
