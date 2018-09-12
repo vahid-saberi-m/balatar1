@@ -18,9 +18,8 @@ class CandidateController extends Controller
         $this->CandidateRepository=$candidateRepository;
 //        $this->middleware('auth:api')->only(['store', 'update','destroy','indexUser','store','approval','activate','update','delete']);
     }
-    public function candidateExist(Request $request, JobPost $jobPost=null)
+    public function candidateExist(Request $request, JobPost $jobPost)
     {
-
         return $this->CandidateRepository->candidateExist($request,$jobPost);
     }
 

@@ -78,7 +78,7 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        $this->authorizeApi('delete',$event);
+        $this->authorizeApi('destroy',$event);
         return $this->EventRepository->delete($event);
     }
 }

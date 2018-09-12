@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CvFolderRequest;
+use App\Http\Resources\ApplicationResource;
+use App\Http\Resources\CvFolderResource;
 use App\Models\CvFolder;
 use App\Models\JobPost;
 use App\Models\User;
@@ -29,14 +31,14 @@ class CvFolderController extends Controller
     public function jobPostCvFolders(JobPost $jobPost)
     {
         $this->authorizeApi('isCompanyJobPost', array(JobPost::class, $jobPost));
-        return $jobPost->cvFolders;
+        return CvFolderResource::collection($jobPost->cvFolders);
     }
 
     public function cvFolderApplications(CvFolder $cvFolder)
     {
         $jobPost = $cvFolder->jobPost;
         $this->authorizeApi('isCompanyJobPost', array(JobPost::class, $jobPost));
-        return $cvFolder->applications()->paginate('10');
+        return ApplicationResource::collection($cvFolder->applications()->paginate('10'));
     }
 
     /**
@@ -83,7 +85,7 @@ class CvFolderController extends Controller
     {
         $this->authorizeApi('isCompanyJobPost', $cvFolder->jobPost);
         $cvFolder->update(['name' => $request->name]);
-        return $cvFolder;
+        return new CvFolderResource($cvFolder);
     }
 
     /**

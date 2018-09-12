@@ -26,7 +26,7 @@ class CvFolderRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => 'required|max:16'
+            "name" => 'required|max:30'
         ];
     }
 }

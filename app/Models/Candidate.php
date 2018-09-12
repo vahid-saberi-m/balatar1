@@ -39,6 +39,6 @@ class Candidate extends Model
         return $this->hasMany('App\Models\Application');
     }
     public function candidateCvs(){
-        return $this->hasMany('App\Models\CandidateCv');
+        return $this->hasMany('App\Models\CandidateCv','candidate_id');
     }
 }

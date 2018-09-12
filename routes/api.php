@@ -45,7 +45,7 @@ Route::group(['prefix' => 'cv-folder', 'as' => 'cvFolder.'], function () {
 
 Route::group(['prefix' => 'candidate', 'as' => 'candidate.'], function () {
     Route::apiResource('', 'CandidateController', ['parameters' => ['' => 'candidate']]);
-    Route::post('exists/{job-post?}', 'CandidateController@candidateExist');
+    Route::post('exists/{jobPost}', 'CandidateController@candidateExist');
 });
 
 Route::group(['prefix' => 'question', 'as' => 'question.'], function () {

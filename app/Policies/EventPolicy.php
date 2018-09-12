@@ -55,9 +55,9 @@ class EventPolicy
      * @param  \App\Models\Event  $event
      * @return mixed
      */
-    public function delete(User $user, Event $event)
+    public function destroy(User $user, Event $event)
     {
-        return auth()->user()->role=='admin';
+        return ($user->role=='admin')&&($user->company_id==$event->company_id);
     }
 
     /**

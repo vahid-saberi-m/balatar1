@@ -2,24 +2,27 @@
 
 namespace App\Repositories;
 
+use App\Http\Resources\CandidateResource;
 use App\Models\Candidate;
 use App\Models\JobPost;
 use Illuminate\Http\Request;
 
 class CandidateRepository
 {
-    public function CandidateExist(Request $request, JobPost $jobPost = null)
+    public function CandidateExist(Request $request, JobPost $jobPost)
     {
-        $email = $request->input('email');
         /** @var Candidate $candidate */
-        $candidate = Candidate::query()->where('email', $email)->first();
-        if ($candidate && $jobPost) {
-            if ($candidate->applications()->where('job_post_id', $jobPost->id)->exists()) {
+        $candidate = Candidate::query()->where('email', 'LIKE', $request->email)->first();
+        if ($candidate) {
+            $appliedBefore=$candidate->applications->where('job_post_id',$jobPost->id)->count();
+            if ($appliedBefore) {
                 return 'شما پیش از این برای این شغل اقدام کرده اید';
+            } else {
+                return new CandidateResource($candidate);
             }
         }
+        return 0;
 
-        return $candidate;
     }
 
     public function store(Request $request)

@@ -24,7 +24,8 @@ class CandidateResource extends JsonResource
             'experience'=>$this->experience,
             'education'=>$this->education,
             'degree'=>$this->degree,
-            'university'=>$this->university
+            'university'=>$this->university,
+            'cvs'=>CandidateCvResource::collection($this->candidateCvs)
         ];
     }
 }
