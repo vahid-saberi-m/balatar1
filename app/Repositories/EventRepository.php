@@ -2,7 +2,10 @@
 
 namespace App\Repositories;
 
+use App\Http\Requests\EventRequest;
 use App\Http\Requests\JobPostRequest;
+use App\Http\Resources\EventCollection;
+use App\Http\Resources\EventResource;
 use App\Models\Company;
 use App\Models\Event;
 use App\Models\JobPost;
@@ -15,10 +18,10 @@ class EventRepository
 //        $events=Event::where('company_id',$company->id)->orderByDesc('id')->take(10);
 
         $events = $company->Events()->orderByDesc('id')->paginate(10);
-        return $events;
+        return EventResource::collection($events);
     }
 
-    public function store(Request $request)
+    public function store(EventRequest $request)
     {
         /** @var Event $event */
        $event= Event::query()->create( [
@@ -28,18 +31,23 @@ class EventRepository
             'main_photo'=>$request->file('main_photo')->store('/companies/events/'),
             'tags'=>$request->tags,
             ]);
-       return $event->id;
+       return new EventResource($event);
     }
 
-    public function update(Request $request,Event $event)
+    public function update(EventRequest $request,Event $event)
     {
+        if ($request->file('main_photo')){
+            $mainPhoto=$request->file('main_photo')->store('/companies/events/');
+        }else{
+            $mainPhoto=$event->main_photo;
+        }
          $event->update( [
             'title'=>$request->title,
             'content'=>$request->input('content'),
-            'main_photo'=>$request->file('main_photo')->store('/companies/events/'),
+            'main_photo'=>$mainPhoto,
             'tags'=>$request->tags,
         ]);
-        return $event;
+        return new EventResource($event);
     }
 
     public function delete(Event $event){
