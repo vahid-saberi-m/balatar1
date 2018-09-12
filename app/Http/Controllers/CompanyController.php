@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CompanyRequest;
 use App\Repositories\CompanyRepository;
 use App\Tools\ApiTrait;
 use Illuminate\Http\Request;
@@ -56,9 +57,8 @@ class CompanyController extends Controller
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function store(Request $request)
+    public function store(CompanyRequest $request)
     {
-//        dd($request);
         $this->authorizeApi('store',Company::class);
         return $this->companyRepository->store($request);
 
@@ -86,7 +86,7 @@ class CompanyController extends Controller
      * @return Company
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(Company $company, Request $request )
+    public function update(Company $company, CompanyRequest $request )
     {
         $this->authorizeApi('update', $company );
         return $this->companyRepository->update($company,$request);

@@ -8,12 +8,11 @@
 
 namespace App\Repositories;
 
+use App\Http\Resources\CompanyResource;
 use App\Models\Company;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
-
-
 
 
 class CompanyRepository
@@ -23,10 +22,9 @@ class CompanyRepository
 //        $company->load(['jobPosts' => function ($query) {
 //            $query->where('is_active', 1)->orderByDesc('id')->take(10);
 //        }]);
-        if ($company->is_live==1){
-        return $company;
-        }
-        else{
+        if ($company->is_live == 1) {
+            return new CompanyResource($company);
+        } else {
             return 'امکان نمایش این صفحه وجود ندارد.';
         }
     }
@@ -38,53 +36,43 @@ class CompanyRepository
      */
     public function update(Company $company, Request $request)
     {
-
-        $company->update([
-            'name' => $request->name,
-            'company_size' => $request->company_size,
-            'slogan' => $request->slogan,
-            'website' => $request->website,
-            'logo' => ($request->file('logo'))? $request->file('logo')->store('companies/logos'):$company->main_photo,
-            'message_title' => $request->message_title,
-            'message_content' => $request->message_content,
-            'main_photo' =>($request->file('main_photo'))? $request->file('main_photo')->store('avatars'):$company->main_photo,
-            'about_us' => $request->about_us,
-            'why_us' => $request->why_us,
-            'recruiting_steps' => $request->recruiting_steps,
-            'address' => $request->address,
-            'email' => $request->email,
-            'phone_number' => $request->phone_number,
-            'location' => $request->location,
-        ]);
-        return $company;
+        if ($request->file('logo')) {
+            $logo = $request->file('logo')->store('companies/logos');
+        } else {
+            $logo = $company->logo;
+        }
+        if ($request->file('main_photo')) {
+            $mainPhoto = $request->file('main_photo')->store('companies/main_photos');
+        } else {
+            $mainPhoto = $company->main_photo;
+        }
+        $company->update(array_merge(
+            $request->all(),
+            [
+                'logo' => $logo,
+                'main_photo' => $mainPhoto
+            ]
+        ));
+        return new CompanyResource($company);
     }
 
     public function store(Request $request)
     {
         $logo = $request->file('logo')->store('companies/logos');
         $mainPhoto = $request->file('main_photo')->store('companies/main_photos');
-        $company = Company::create([
-            'name' => $request->name,
-            'company_size' => $request->company_size,
-            'slogan' => $request->slogan,
-            'website' => $request->website,
-            'logo' => $logo,
-            'message_title' => $request->message_title,
-            'message_content' => $request->message_content,
-            'main_photo' => $mainPhoto,
-            'about_us' => $request->about_us,
-            'why_us' => $request->why_us,
-            'recruiting_steps' => $request->recruiting_steps,
-            'address' => $request->address,
-            'email' => $request->email,
-            'phone_number' => $request->phone_number,
-            'location' => $request->location,
-            'package_id' => '1'
-        ]);
-        return response()-> $company;
+//        dd($request->name);
+        $company = Company::create(array_merge(
+            $request->all(),
+            [
+                'logo' => $logo,
+                'main_photo' => $mainPhoto
+            ]
+        ));
+        return new CompanyResource($company);
     }
 
-    public function destroy(Company $company){
+    public function destroy(Company $company)
+    {
         $company->delete();
         return 'success';
     }
