@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\JobPostRequest;
+use App\Http\Resources\JobPostResource;
 use App\Models\JobPost;
 use App\Models\Company;
 use App\Tools\ApiTrait;
@@ -31,7 +32,7 @@ class JobPostController extends Controller
      */
     public function indexPublic(Company $company)
     {
-        return response()->json($this->jobPostRepository->indexPubic($company));
+        return $this->jobPostRepository->indexPubic($company);
     }
 
     /**
@@ -54,8 +55,6 @@ class JobPostController extends Controller
      */
     public function store(JobPostRequest $request)
     {
-//        $this->authorizeApi('store',array(JobPost::class, $request, $user=auth()->user()));
-        $validated = $request->validated();
         return $this->jobPostRepository->store($request);
     }
 
@@ -81,8 +80,11 @@ class JobPostController extends Controller
      */
     public function show(JobPost $jobPost)
     {
-        $this->authorize('view', $jobPost);
-
+        if ($jobPost->is_active==1) {
+            return new JobPostResource($jobPost);
+        } else{
+            return 'not active';
+        }
     }
 
     /**

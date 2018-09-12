@@ -9,6 +9,8 @@
 namespace App\Repositories;
 
 use App\Http\Requests\JobPostRequest;
+use App\Http\Resources\JobPostCollection;
+use App\Http\Resources\JobPostResource;
 use App\Models\Company;
 use App\Models\JobPost;
 use App\Models\User;
@@ -22,17 +24,13 @@ class JobPostRepository
 {
     private $packageUsageRepository;
     private $cvFolderRepository;
+
     public function __construct(PackageUsageRepository $packageUsageRepository, CvFolderRepository $cvFolderRepository)
     {
         $this->packageUsageRepository = $packageUsageRepository;
-        $this->cvFolderRepository=$cvFolderRepository;
+        $this->cvFolderRepository = $cvFolderRepository;
     }
 
-
-    public function show(JobPost $jobPost)
-    {
-        return $jobPost;
-    }
 
     /**
      * @param $company
@@ -40,7 +38,7 @@ class JobPostRepository
     public function indexPubic(Company $company)
     {
         $jobPosts = $company->jobPosts->where('is_active', '1')->where('approval', '1');
-        return $jobPosts;
+        return new JobPostCollection($jobPosts);
     }
 
     public function indexUser(Company $company)
@@ -48,16 +46,15 @@ class JobPostRepository
         $user = auth()->user();
         if ($user->role == 'admin') {
             $jobPosts = $company->jobPosts;
-            return $jobPosts;
+            return new JobPostCollection($jobPosts);
         } else {
             $jobPosts = $user->jobPosts;
-            return $jobPosts;
+            return new JobPostCollection($jobPosts);
         }
     }
 
     public function store(JobPostRequest $request)
     {
-//        dd($request->title);
         //Cheks how many cv views can this company have and how long can a job post be live
         $cvView = auth()->user()->company->package->per_job_post_cv_view;
         ($cvView == null) ? $cvView = 10000 : $cvView;
@@ -67,23 +64,17 @@ class JobPostRepository
         $expirationDate = new Carbon($request->expiration_date);
         $limitDay = $publishDate->addDays($jobPostLifetimeLimit);
         (!$expirationDate->gt($limitDay)) ?: $expirationDate = $limitDay;
-        $jobPost = JobPost::create([
+        $jobPost = JobPost::create(array_merge([
             'company_id' => auth()->user()->company_id,
             'user_id' => auth()->user()->id,
-            'title' => $request->title,
-            'summary' => $request->summary,
-            'description' => $request->description,
-            'requirements' => $request->requirements,
-            'benefits' => $request->benefits,
+            'is_active' => 0,
             'approval' => (auth()->user()->role == 'admin') ? 1 : 0,
-            'location' => $request->location,
             'publish_date' => $request->publish_date,
             'expiration_date' => $expirationDate->toDateString(),
             'cv_views' => $cvView,
-            'is_active' => 0
-        ]);
+        ], $request->all()));
         $this->cvFolderRepository->CreateJobPostCvFolders($jobPost);
-        return $jobPost;
+        return new JobPostResource($jobPost);
     }
 
     public function approval(JobPost $jobPost)
@@ -95,20 +86,19 @@ class JobPostRepository
 
     public function activate(JobPost $jobPost)
     {
-        $company=$jobPost->company;
-        if ($jobPost->is_active==0){
-            $value=1;
-            $packageUsage=$this->packageUsageRepository->remainingJobPosts($company, $value);
-            if ($packageUsage){
-            $jobPost->update(array('is_active' => 1));
-            return 'فعال شد';
-            } else{
+        $company = $jobPost->company;
+        if ($jobPost->is_active == 0) {
+            $value = 1;
+            $packageUsage = $this->packageUsageRepository->remainingJobPosts($company, $value);
+            if ($packageUsage) {
+                $jobPost->update(array('is_active' => 1));
+                return 'فعال شد';
+            } else {
                 return 'شما حد اکثر فرصت های شغلی فعال بسته خود را مصرف نموده اید';
             }
         }
-        if ($jobPost->is_active==1)
-        {
-            $value=0;
+        if ($jobPost->is_active == 1) {
+            $value = 0;
             $this->packageUsageRepository->remainingJobPosts($company, $value);
             $jobPost->update(array('is_active' => 0));
             return 'غیر فعال شد';

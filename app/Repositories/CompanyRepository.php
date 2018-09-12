@@ -74,6 +74,6 @@ class CompanyRepository
     public function destroy(Company $company)
     {
         $company->delete();
-        return 'success';
+        return 'deleted';
     }
 }

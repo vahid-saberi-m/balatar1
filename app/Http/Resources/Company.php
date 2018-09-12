@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class Company extends JsonResource
 {
@@ -24,7 +25,7 @@ class Company extends JsonResource
             'logo'=>$this->logo,
             'message_title'=>$this->message_title,
             'message_content'=>$this->message_content,
-            'main_photo'=>$this->main_photo,
+            'main_photo'=>Storage::url($this->main_photo),
             'about_us'=>$this->about_us,
             'why_us'=>$this->why_us,
             'recruiting_steps'=>$this->recruiting_steps,

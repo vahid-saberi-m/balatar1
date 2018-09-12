@@ -18,42 +18,51 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix'=>'company', 'as' => 'company.'], function () {
+Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
     Route::apiResource('', 'CompanyController', ['parameters' => ['' => 'company']]);
 });
 
-//Route::apiResource('companies', 'CompanyController');
+Route::group(['prefix' => 'job-post', 'as' => 'company.'], function () {
+    Route::apiResource('', 'JobPostController', ['parameters' => ['' => 'jobPost']]);
+    Route::get('index-public/{company}', 'JobPostController@indexPublic');
+    Route::get('index-user/{company}', 'JobPostController@indexUser');
+    Route::get('activate/{jobPost}', 'JobPostController@activate');
+    Route::get('approval/{jobPost}', 'JobPostController@approval');
+
+});
+
+Route::group(['prefix' => 'event', 'as' => 'event.'], function () {
+    Route::apiResource('', 'eventController', ['parameters' => ['' => 'event']]);
+    Route::get('index-public/{company}', 'EventController@indexPublic');
+});
+
+Route::group(['prefix' => 'cv-folder', 'as' => 'cvFolder.'], function () {
+    Route::apiResource('', 'CvFolderController', ['parameters' => ['' => 'cvFolder']]);
+    Route::get('job-post/{jobPost}', 'CvFolderController@jobPostCvFolders');
+    Route::post('store/{jobPost}', 'CvFolderController@store');
+    Route::get('applications/{cvFolder} ', 'CvFolderController@cvFolderApplications');
+});
+
+Route::group(['prefix' => 'candidate', 'as' => 'candidate.'], function () {
+    Route::apiResource('', 'CandidateController', ['parameters' => ['' => 'candidate']]);
+    Route::post('exists/{job-post?}', 'CandidateController@candidateExist');
+});
+
+Route::group(['prefix' => 'question', 'as' => 'question.'], function () {
+    Route::apiResource('', 'QuestionController', ['parameters' => ['' => 'question']]);
+    Route::get('job-post/{jobPost} ', 'QuestionController@jobPostQuestions');
+    Route::post('answer/{jobPost} ', 'QuestionController@answerCheck');
+    Route::post('create/{jobPost} ', 'QuestionController@store');
+    Route::get('{question} ', 'QuestionController@show');
+});
 
 Route::apiResource('packages', 'PackageController');
 
 Route::apiResource('package-usages', 'PackageUsageController');
 
-Route::get('events/index-public/{company}', 'EventController@indexPublic');
-Route::apiResource('events', 'EventController');
-
-
-Route::get('job-post/cv-folders/{jobPost}', 'CvFolderController@jobPostCvFolders');
-Route::post('cv-folder/store/{jobPost}', 'CvFolderController@store');
-Route::get('cv-folder/applications/{cvFolder} ', 'CvFolderController@cvFolderApplications');
-Route::apiResource('cv-folders', 'CvFolderController');
-
-Route::get('job-posts/{jobPost}/activate', 'JobPostController@activate');
-Route::get('job-posts/index-public/{company}','JobPostController@indexPublic');
-Route::get('job-posts/index-user/{company}','JobPostController@indexUser');
-Route::get('job-posts/{jobPost}/approval', 'JobPostController@approval');
-Route::apiResource('job-posts', 'JobPostController');
-
-Route::post('candidate/exists/{job-post?}', 'CandidateController@candidateExist');
-Route::apiResource('candidates', 'CandidateController');
-
-//Route:: get('applications/show/{application}','ApplicationController@show');
-Route::apiResource('applications','ApplicationController');
+Route::apiResource('applications', 'ApplicationController');
 
 Route::apiResource('users ', 'UserController');
 
 
-Route::get('job-post/questions/{jobPost} ', 'QuestionController@jobPostQuestions');
-Route::post('question/answer/{jobPost} ', 'QuestionController@answerCheck');
-Route::post('question/create/{jobPost} ', 'QuestionController@store');
-Route::get('questions/{question} ', 'QuestionController@show');
-Route::apiResource('questions ', 'QuestionController');
+
