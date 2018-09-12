@@ -6,7 +6,7 @@ use App\Models\Candidate;
 use App\Models\JobPost;
 use Illuminate\Http\Request;
 
-class candidateRepository
+class CandidateRepository
 {
     public function CandidateExist(Request $request, JobPost $jobPost = null)
     {
@@ -36,6 +36,12 @@ class candidateRepository
             'university' => $request->university
         ]);
 
+        return $candidate;
+    }
+
+    public function update(Candidate $candidate, Request $request)
+    {
+        $candidate->update([$request->all()]);
         return $candidate;
     }
 }

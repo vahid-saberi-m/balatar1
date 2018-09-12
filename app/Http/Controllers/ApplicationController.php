@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ApplicationRequest;
 use App\Models\Application;
 use App\Models\Candidate;
 use App\Models\JobPost;
 use App\Repositories\ApplicationRepository;
 use Illuminate\Http\Request;
+use App\Tools\ApiTrait;
 
 class ApplicationController extends Controller
 {
+    use ApiTrait;
     private $applicationRepository;
     public function __construct(ApplicationRepository $applicationRepository)
     {
         $this->applicationRepository = $applicationRepository;
-//        $this->middleware('auth:api')->only(['store', 'update','destroy','indexUser','store','approval','activate','update','delete']);
+        $this->middleware('auth:api')->except(['store']);
     }
 
     /**
@@ -34,7 +37,7 @@ class ApplicationController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, JobPost $jobPost)
+    public function store(ApplicationRequest $request, JobPost $jobPost)
     {
         return $this->applicationRepository->store($jobPost, $request);
     }
@@ -47,7 +50,9 @@ class ApplicationController extends Controller
      */
     public function show(Application $application)
     {
-        //
+//        dd($application);
+        $this->authorizeApi('show',$application);
+       return $this->applicationRepository->show($application);
     }
 
     /**
@@ -70,6 +75,8 @@ class ApplicationController extends Controller
      */
     public function destroy(Application $application)
     {
-        //
+        $this->authorizeApi('show',$application);
+        $application->delete();
+        return 'deleted';
     }
 }

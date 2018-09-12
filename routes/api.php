@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::post('apply/{jobPost} ', 'ApplicationController@store');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -21,7 +22,7 @@ Route::group(['prefix'=>'company', 'as' => 'company.'], function () {
     Route::apiResource('', 'CompanyController', ['parameters' => ['' => 'company']]);
 });
 
-Route::apiResource('companies', 'CompanyController');
+//Route::apiResource('companies', 'CompanyController');
 
 Route::apiResource('packages', 'PackageController');
 
@@ -45,8 +46,8 @@ Route::apiResource('job-posts', 'JobPostController');
 Route::post('candidate/exists/{job-post?}', 'CandidateController@candidateExist');
 Route::apiResource('candidates', 'CandidateController');
 
-Route::post('apply/{candidate}/{job-post} ', 'ApplicationController@store');
-Route::post('applications/new-candidate/{job-post} ', 'ApplicationController@newCandidate');
+//Route:: get('applications/show/{application}','ApplicationController@show');
+Route::apiResource('applications','ApplicationController');
 
 Route::apiResource('users ', 'UserController');
 

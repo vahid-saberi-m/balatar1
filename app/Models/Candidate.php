@@ -38,7 +38,7 @@ class Candidate extends Model
     public function applications(){
         return $this->hasMany('App\Models\Application');
     }
-    public function CandidateCVs(){
+    public function candidateCvs(){
         return $this->hasMany('App\Models\CandidateCv');
     }
 }
