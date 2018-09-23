@@ -14,7 +14,7 @@ class CandidateRepository
         /** @var Candidate $candidate */
         $candidate = Candidate::query()->where('email', 'LIKE', $request->email)->first();
         if ($candidate) {
-            $appliedBefore=$candidate->applications->where('job_post_id',$jobPost->id)->count();
+            $appliedBefore=$candidate->applications()->where('job_post_id',$jobPost->id)->exists();
             if ($appliedBefore) {
                 return 'شما پیش از این برای این شغل اقدام کرده اید';
             } else {
