@@ -63,6 +63,8 @@ Route::apiResource('package-usages', 'PackageUsageController');
 Route::apiResource('applications', 'ApplicationController');
 
 Route::apiResource('users ', 'UserController');
+Route::post('logout','UserController@logoutApi');
+
 
 
 

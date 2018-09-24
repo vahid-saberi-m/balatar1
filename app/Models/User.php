@@ -59,5 +59,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Models\Company');
     }
+    public function OauthAccessToken(){
+        return $this->hasMany('\App\Models\OauthAccessToken','user_id');
+    }
 
 }
