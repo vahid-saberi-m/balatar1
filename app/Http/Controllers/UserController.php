@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
+use App\Repositories\UserRepository;
+use App\Tools\ApiTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function __construct()
+    use ApiTrait;
+    private $userRepository;
+    public function __construct(UserRepository $userRepository)
     {
-        $this->middleware('auth:api');
+        $this->userRepository=$userRepository;
+        $this->middleware('auth:api')->except(['store']);
     }
+
     public function logoutApi()
     {
         if(auth()->user()) {
@@ -32,12 +40,16 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param UserRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        return User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+        ]);
     }
 
     /**
