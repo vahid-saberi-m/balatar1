@@ -68,6 +68,7 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
     Route::apiResource('', 'UserController', ['parameters' => ['' => 'question']]);
     Route::get('show','UserController@show');
     Route::post('logout','UserController@logoutApi');
+    Route::post('/join-company/{company}','UserController@joinCompany');
 
 });
 
