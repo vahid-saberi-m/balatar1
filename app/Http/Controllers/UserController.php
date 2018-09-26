@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Http\Resources\UserResource;
 use App\Models\Company;
 use App\Models\User;
 use App\Repositories\UserRepository;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use function MongoDB\BSON\toJSON;
 
 class UserController extends Controller
 {
@@ -70,7 +72,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return auth()->user();
+            return new UserResource($user);
+
     }
 
     /**
