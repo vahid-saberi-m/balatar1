@@ -65,7 +65,8 @@ class CompanyRepository
             $request->all(),
             [
                 'logo' => $logo,
-                'main_photo' => $mainPhoto
+                'main_photo' => $mainPhoto,
+                'package_id'=>1
             ]
         ));
         return new CompanyResource($company);
