@@ -19,6 +19,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string position
  * @property string image
  * @property boolean is_approved
+ *
+ * @property Company company
  */
 class User extends Authenticatable
 {

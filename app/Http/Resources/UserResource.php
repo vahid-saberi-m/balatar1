@@ -2,8 +2,13 @@
 
 namespace App\Http\Resources;
 
+use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * Class UserResource
+ * @package App\Http\Resources\
+ */
 class UserResource extends JsonResource
 {
     /**
@@ -14,6 +19,8 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
+        /** @var User $user */
+        $user = auth()->user();
         return [
             'company_id'=>$this->company_id,
             'name'=>$this->name,
@@ -23,8 +30,7 @@ class UserResource extends JsonResource
             'position'=>$this->position,
             'image'=>$this->image,
             'is_approved'=>$this->is_approved,
-            'company_is_live'=>auth()->user()->company->is_live,
-
+            'company_is_live'=> $user->company()->exists() && $user->company->is_live
         ];
     }
 }
