@@ -72,7 +72,7 @@ class UserController extends Controller
      */
     public function show()
     {
-        $user=auth()->user;
+        $user=auth()->user();
             return new UserResource($user);
 
     }
