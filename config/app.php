@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://api.balatar.inpin.co/'),
+    'url' => env('APP_URL', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------
