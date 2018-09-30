@@ -26,10 +26,10 @@ class JobPostRequest extends FormRequest
     {
         return [
             'title' => 'required|max:155',
-            'summary' => 'required|max:255',
+            'summary' => 'sometimes|max:255',
             'description' => 'required|max:255',
-            'requirements' => 'required|max:255',
-            'benefits' => 'required|max:255',
+            'requirements' => 'sometimes|max:255',
+            'benefits' => 'sometimes|max:255',
             'location' => 'required|max:255',
             'publish_date' => 'required|after_or_equal:today',
             'expiration_date'=>'required|after_or_equal:publish_date',
