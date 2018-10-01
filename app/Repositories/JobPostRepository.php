@@ -55,7 +55,7 @@ class JobPostRepository
     }
 
     public function lastFive(){
-        $jobPosts=auth()->user()->jobPosts()->orderBy('id','desc')->paginate(5);
+        $jobPosts=auth()->user()->jobPosts()->orderBy('id','desc')->take(5)->get();
         return new JobPostTitleCollection($jobPosts);
     }
 
