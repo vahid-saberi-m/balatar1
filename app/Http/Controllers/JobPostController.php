@@ -51,7 +51,20 @@ class JobPostController extends Controller
         return $this->jobPostRepository->lastFive();
 
     }
+    public function indexWaiting()
+    {
+        return $this->jobPostRepository->indexWaiting();
+    }
 
+    public function indexLive()
+    {
+        return $this->jobPostRepository->indexLive();
+    }
+
+    public function indexExpired()
+    {
+        return $this->jobPostRepository->indexExpired();
+    }
     /**
      * Store a newly created resource in storage.
      *

@@ -28,6 +28,9 @@ Route::group(['prefix' => 'job-post', 'as' => 'company.'], function () {
     Route::get('activate/{jobPost}', 'JobPostController@activate');
     Route::get('approval/{jobPost}', 'JobPostController@approval');
     Route::get('/last-five', 'JobPostController@lastFive');
+    Route::get('/index-waiting', 'JobPostController@indexWaiting');
+    Route::get('/index-live', 'JobPostController@indexLive');
+    Route::get('/index-expired', 'JobPostController@indexExpired');
     Route::apiResource('', 'JobPostController', ['parameters' => ['' => 'jobPost']]);
 
 });
