@@ -9,6 +9,7 @@
 namespace App\Repositories;
 
 use App\Http\Requests\JobPostRequest;
+use App\Http\Resources\JobPost\JobPostTitleCollection;
 use App\Http\Resources\JobPostCollection;
 use App\Http\Resources\JobPostResource;
 use App\Models\Company;
@@ -51,6 +52,11 @@ class JobPostRepository
             $jobPosts = $user->jobPosts;
             return new JobPostCollection($jobPosts);
         }
+    }
+
+    public function lastFive(){
+        $jobPosts=auth()->user()->jobPosts()->orderBy('id','desc')->paginate(5);
+        return new JobPostTitleCollection($jobPosts);
     }
 
     public function store(JobPostRequest $request)

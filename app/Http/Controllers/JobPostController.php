@@ -22,7 +22,7 @@ class JobPostController extends Controller
     public function __construct(JobPostRepository $jobPostRepository)
     {
         $this->jobPostRepository = $jobPostRepository;
-        $this->middleware('auth:api')->only(['store', 'update', 'destroy', 'indexUser', 'store', 'approval', 'activate', 'update', 'delete']);
+        $this->middleware('auth:api')->except(['show']);
     }
 
     /**
@@ -46,6 +46,11 @@ class JobPostController extends Controller
         return $this->jobPostRepository->indexUser($company);
     }
 
+    public function lastFive(){
+
+        return $this->jobPostRepository->lastFive();
+
+    }
 
     /**
      * Store a newly created resource in storage.

@@ -23,11 +23,12 @@ Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
 });
 
 Route::group(['prefix' => 'job-post', 'as' => 'company.'], function () {
-    Route::apiResource('', 'JobPostController', ['parameters' => ['' => 'jobPost']]);
     Route::get('index-public/{company}', 'JobPostController@indexPublic');
     Route::get('index-user/{company}', 'JobPostController@indexUser');
     Route::get('activate/{jobPost}', 'JobPostController@activate');
     Route::get('approval/{jobPost}', 'JobPostController@approval');
+    Route::get('/last-five', 'JobPostController@lastFive');
+    Route::apiResource('', 'JobPostController', ['parameters' => ['' => 'jobPost']]);
 
 });
 
