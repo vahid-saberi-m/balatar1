@@ -57,7 +57,7 @@ class JobPostRepository
     {
         $user = auth()->user();
         if ($user->role == 'admin') {
-            $jobPosts = $user->company()->jobPosts()->where(['approval'=>0])->paginate(5);
+            $jobPosts = $user->company->jobPosts()->where(['approval'=>0])->paginate(5);
             return new JobPostCollection($jobPosts);
         } else {
             $jobPosts = $user->jobPosts()->where(['approval'=>0])->paginate(5);
@@ -69,7 +69,7 @@ class JobPostRepository
     {
         $user = auth()->user();
         if ($user->role == 'admin') {
-            $jobPosts = $user->company()->jobPosts()->where(['approval'=>1,'is_active'=>1,['publish_date','<=',Carbon::now()],['expiration_date','>=',Carbon::now()]])->paginate(5);
+            $jobPosts = $user->company->jobPosts()->where(['approval'=>1,'is_active'=>1,['publish_date','<=',Carbon::now()],['expiration_date','>=',Carbon::now()]])->paginate(5);
             return new JobPostCollection($jobPosts);
         } else {
             $jobPosts = $user->jobPosts()->where(['approval'=>1,'is_active'=>1,['publish_date','<=',Carbon::now()],['expiration_date','>=',Carbon::now()]])->paginate(5);
@@ -80,7 +80,7 @@ class JobPostRepository
     {
         $user = auth()->user();
         if ($user->role == 'admin') {
-            $jobPosts = $user->company()->jobPosts()->where(['approval'=>1,['expiration_date','<=',Carbon::now()]])->paginate(5);
+            $jobPosts = $user->company->jobPosts()->where(['approval'=>1,['expiration_date','<=',Carbon::now()]])->paginate(5);
             return new JobPostCollection($jobPosts);
         } else {
             $jobPosts = $user->jobPosts()->where(['approval'=>1,['expiration_date','<=',Carbon::now()]])->paginate(5);
