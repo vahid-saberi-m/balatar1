@@ -17,7 +17,9 @@ class ApplicationResource extends JsonResource
         return [
             'id'=>$this->id,
             'is_seen'=>$this->is_seen,
-            'candidate'=> new CandidateResource($this->candidate),
+            'name'=>$this->name,
+            'position'=>$this->position,
+            'company'=>$this->company,
         ];
     }
 }
