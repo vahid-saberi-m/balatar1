@@ -37,7 +37,6 @@ class JobPostRepository
     public function jobPostApplications(JobPost $jobPost){
         $applications=$jobPost->applications()->get()->all();
         if($applications){
-            dd($applications);
         return new ApplicationCollection($applications);
         }else{
             return 'no application';
