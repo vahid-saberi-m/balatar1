@@ -18,7 +18,8 @@ class ApplicationCollection extends ResourceCollection
             'name'=>$this->name,
             'is_seen'=>$this->is_seen,
             'position'=>$this->position,
-            'company'=>$this->company
+            'company'=>$this->company,
+            'cv_folder_id'=>$this->cv_folder_id
         ];
     }
 }
