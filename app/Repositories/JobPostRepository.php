@@ -9,6 +9,7 @@
 namespace App\Repositories;
 
 use App\Http\Requests\JobPostRequest;
+use App\Http\Resources\ApplicationCollection;
 use App\Http\Resources\JobPost\JobPostTitleCollection;
 use App\Http\Resources\JobPostCollection;
 use App\Http\Resources\JobPostResource;
@@ -33,6 +34,15 @@ class JobPostRepository
     }
 
 
+    public function jobPostApplications(JobPost $jobPost){
+        $applications=$jobPost->applications()->get()->all();
+        if($applications){
+            dd($applications);
+        return new ApplicationCollection($applications);
+        }else{
+            return 'no application';
+        }
+    }
     /**
      * @param $company
      */

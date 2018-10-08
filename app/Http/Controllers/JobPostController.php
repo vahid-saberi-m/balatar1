@@ -22,7 +22,7 @@ class JobPostController extends Controller
     public function __construct(JobPostRepository $jobPostRepository)
     {
         $this->jobPostRepository = $jobPostRepository;
-        $this->middleware('auth:api')->except(['show']);
+        $this->middleware('auth:api')->except(['show','indexPublic']);
     }
 
     /**
@@ -64,6 +64,13 @@ class JobPostController extends Controller
     public function indexExpired()
     {
         return $this->jobPostRepository->indexExpired();
+    }
+
+
+    public function jobPostApplications(JobPost $jobPost)
+    {
+        $this->authorizeApi('isCompanyJobPost', $jobPost);
+        return $this->jobPostRepository->jobPostApplications($jobPost);
     }
     /**
      * Store a newly created resource in storage.
