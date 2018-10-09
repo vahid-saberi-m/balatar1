@@ -20,9 +20,8 @@ class ApplicationPolicy
      */
     public function show(User $user, Application $application)
     {
-//        dd($application->jobPost);
         return ($user->company->id == $application->jobPost->user->id) &&
-            ($user->jobPosts()->findOrFail($application->job_post_id) || $user->role == 'admin');
+            ($user->jobPosts()->find($application->job_post_id) || $user->role == 'admin');
     }
 
     /**
