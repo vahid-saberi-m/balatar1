@@ -2,7 +2,9 @@
 
 namespace App\Repositories;
 
-use App\Http\Resources\CandidateResource;
+use App\Http\Resources\Candidate\CandidateAppliedBeforeResource;
+use App\Http\Resources\Candidate\CandidateDidNotApplyBeforeResource;
+use App\Http\Resources\Candidate\CandidateResource;
 use App\Models\Candidate;
 use App\Models\JobPost;
 use Illuminate\Http\Request;
@@ -16,12 +18,12 @@ class CandidateRepository
         if ($candidate) {
             $appliedBefore=$candidate->applications()->where('job_post_id',$jobPost->id)->exists();
             if ($appliedBefore) {
-                return 'شما پیش از این برای این شغل اقدام کرده اید';
+                return new CandidateAppliedBeforeResource($candidate);
             } else {
-                return new CandidateResource($candidate);
+                return new CandidateDidNotApplyBeforeResource($candidate);
             }
         }
-        return 0;
+        return null;
 
     }
 
