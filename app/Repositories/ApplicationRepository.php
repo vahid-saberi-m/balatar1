@@ -19,6 +19,20 @@ class ApplicationRepository
         $this->candidateRepository = $candidateRepository;
     }
 
+
+
+    public function appliedBefore(JobPost $jobPost, Request $request)
+    {
+        $candidate= Candidate::query()->where('email',$request->email)->first();
+        if($candidate){
+            return $candidate->applications->where('job_post_id',$jobPost->id)->first();
+        }else{
+            return null;
+        }
+    }
+
+
+
     public function store(JobPost $jobPost, Request $request)
     {
         $cvFolder = $jobPost->cvFolders()->where('name', 'صف انتظار')->first();

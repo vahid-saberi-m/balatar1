@@ -65,7 +65,11 @@ Route::apiResource('packages', 'PackageController');
 
 Route::apiResource('package-usages', 'PackageUsageController');
 
-Route::apiResource('applications', 'ApplicationController');
+Route::group(['prefix' => 'application', 'as' => 'applications.'], function () {
+Route::apiResource('', 'ApplicationController', ['parameters' => ['' => 'application']]);
+    Route::post('applied-before/{jobPost} ', 'ApplicationController@appliedBefore');
+});
+
 
 Route::apiResource('users ', 'UserController');
 

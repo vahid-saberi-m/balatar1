@@ -22,7 +22,7 @@ class Company extends JsonResource
             'company_size'=>$this->company_size,
             'slogan'=>$this->slogan,
             'website'=>$this->website,
-            'logo'=>$this->logo,
+            'logo'=>Storage::url($this->logo),
             'message_title'=>$this->message_title,
             'message_content'=>$this->message_content,
             'main_photo'=>Storage::url($this->main_photo),

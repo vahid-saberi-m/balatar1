@@ -19,6 +19,10 @@ class ApplicationController extends Controller
         $this->applicationRepository = $applicationRepository;
         $this->middleware('auth:api')->except(['store']);
     }
+    public function appliedBefore(JobPost $jobPost, Request $request)
+    {
+        return $this->applicationRepository->appliedBefore($jobPost,$request);
+    }
 
     /**
      * Display a listing of the resource.
