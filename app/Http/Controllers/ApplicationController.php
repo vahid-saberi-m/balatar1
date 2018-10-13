@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ApplicationRequest;
 use App\Models\Application;
 use App\Models\Candidate;
+use App\Models\CvFolder;
 use App\Models\JobPost;
+use App\Models\User;
 use App\Repositories\ApplicationRepository;
 use Illuminate\Http\Request;
 use App\Tools\ApiTrait;
@@ -34,6 +36,11 @@ class ApplicationController extends Controller
         //
     }
 
+    public function changeCvFolder( Application $application, CvFolder $cvFolder){
+        $this->authorizeApi('show',$application);
+        return $this->applicationRepository->changeCvFolder($application,$cvFolder);
+
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -54,7 +61,6 @@ class ApplicationController extends Controller
      */
     public function show(Application $application)
     {
-//        dd($application);
         $this->authorizeApi('show',$application);
        return $this->applicationRepository->show($application);
     }

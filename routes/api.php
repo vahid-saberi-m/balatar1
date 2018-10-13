@@ -68,6 +68,7 @@ Route::apiResource('package-usages', 'PackageUsageController');
 Route::group(['prefix' => 'application', 'as' => 'applications.'], function () {
 Route::apiResource('', 'ApplicationController', ['parameters' => ['' => 'application']]);
     Route::post('applied-before/{jobPost} ', 'ApplicationController@appliedBefore');
+    Route::get('change-cv-folder/{application}/{cvFolder} ', 'ApplicationController@changeCvFolder');
 });
 
 

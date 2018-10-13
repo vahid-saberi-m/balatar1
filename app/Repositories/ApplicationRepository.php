@@ -86,4 +86,13 @@ class ApplicationRepository
         }
     }
 
+    public function changeCvFolder(Application $application ,CvFolder $cvFolder ){
+        if($application->job_post_id==$cvFolder->job_post_id) {
+            $application->update(['cv_folder_id'=> $cvFolder->id]);
+            return $application;
+        }else {
+            return 'error';
+        }
+    }
+
 }

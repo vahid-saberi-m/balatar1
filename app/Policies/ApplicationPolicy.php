@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Application;
+use App\Models\CvFolder;
 use App\Models\JobPost;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -23,6 +24,8 @@ class ApplicationPolicy
         return ($user->company->id == $application->jobPost->company_id) &&
             ($user->jobPosts()->find($application->job_post_id) || $user->role == 'admin');
     }
+
+
 
     /**
      * Determine whether the user can create applications.
