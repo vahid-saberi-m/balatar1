@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Models\CandidateCv;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class ApplicationResource extends JsonResource
 {
@@ -26,7 +27,7 @@ class ApplicationResource extends JsonResource
             'phone'=>$this->phone,
             'university'=>$this->university,
             'cv_folder_id'=>$this->cv_folder_id,
-            'cv'=>CandidateCv::query()->find($this->candidate_cv)
+            'cv'=>Storage::url( CandidateCv::query()->find($this->candidate_cv)->cv)
         ];
     }
 }
