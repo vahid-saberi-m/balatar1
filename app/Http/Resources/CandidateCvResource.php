@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Repositories\FileRepository;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,7 +17,7 @@ class CandidateCvResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'cv'=>Storage::url($this->cv),
+            'cv'=>FileRepository::getUrl($this->cv),
             'file_name'=>$this->file_name
         ];
     }

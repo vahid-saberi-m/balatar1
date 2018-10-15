@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Repositories\FileRepository;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,7 +19,7 @@ class EventResource extends JsonResource
         return [
             'title'=>$this->title,
             'content'=>$this->content,
-            'main_photo'=>Storage::url($this->main_photo),
+            'main_photo'=>FileRepository::getUrl($this->main_photo),
             'tags'=>$this->tags,
             'id'=>$this->id
         ];

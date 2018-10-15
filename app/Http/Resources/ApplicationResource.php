@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\CandidateCv;
+use App\Repositories\FileRepository;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
@@ -27,7 +28,7 @@ class ApplicationResource extends JsonResource
             'phone'=>$this->phone,
             'university'=>$this->university,
             'cv_folder_id'=>$this->cv_folder_id,
-            'cv'=>config('filesystems.disks.ftp.access_url').CandidateCv::query()->find($this->candidate_cv)->cv
+            'cv'=>FileRepository::getUrl(CandidateCv::query()->find($this->candidate_cv)->cv),
         ];
     }
 }
