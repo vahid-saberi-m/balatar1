@@ -21,6 +21,10 @@ class ApplicationResource extends JsonResource
             'name'=>$this->name,
             'position'=>$this->position,
             'company'=>$this->company,
+            'education'=>$this->education,
+            'degree'=>$this->degree,
+            'phone'=>$this->phone,
+            'university'=>$this->university,
             'cv_folder_id'=>$this->cv_folder_id,
             'cv'=>CandidateCv::query()->find($this->candidate_cv)
         ];
