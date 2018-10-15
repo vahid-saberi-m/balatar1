@@ -27,7 +27,7 @@ class ApplicationResource extends JsonResource
             'phone'=>$this->phone,
             'university'=>$this->university,
             'cv_folder_id'=>$this->cv_folder_id,
-            'cv'=>Storage::url( CandidateCv::query()->find($this->candidate_cv)->cv)
+            'cv'=>config('filesystems.disks.ftp.access_url').CandidateCv::query()->find($this->candidate_cv)->cv
         ];
     }
 }
