@@ -68,7 +68,7 @@ return [
             'host'     => 'ftp.example.com',
             'username' => 'your-username',
             'password' => 'your-password',
-            'access_url'=>''
+            'access_url'=>'http://files.balatar.inpin.co'
 
         ],
     ],
