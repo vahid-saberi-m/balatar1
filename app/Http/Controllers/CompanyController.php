@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CompanyRequest;
 use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Repositories\CompanyRepository;
 use App\Tools\ApiTrait;
@@ -39,7 +40,7 @@ class CompanyController extends Controller
 
     public function companyUsers(Company $company){
         $this->authorizeApi('update',$company);
-        return new UserCollection($company->users);
+        return UserResource::collection($company->users);
     }
 
     /**
