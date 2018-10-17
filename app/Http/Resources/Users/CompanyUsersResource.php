@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Users;
 
 use App\Repositories\FileRepository;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -22,7 +22,7 @@ class CompanyUsersResource extends JsonResource
             'password'=>$this->password,
             'role'=>$this->role,
             'position'=>$this->position,
-            'image'=>FileRepository::getUrl('/'.$this->image),
+            'image'=>FileRepository::getUrl($this->image),
             'is_approved'=>$this->is_approved,
         ];
     }
