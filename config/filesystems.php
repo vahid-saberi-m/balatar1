@@ -65,10 +65,10 @@ return [
         ],
         'ftp' => [
             'driver'   => 'ftp',
-            'host'     => 'ftp.example.com',
-            'username' => 'your-username',
-            'password' => 'your-password',
-            'access_url'=>'http://files.balatar.inpin.co'
+            'host'     => $_ENV['FTP_HOST'],
+            'username' => $_ENV['FTP_USERNAME'],
+            'password' => $_ENV['FTP_PASSWORD'],
+            'access_url'=>$_ENV['FTP_ACCESS_URL']
 
         ],
     ],
