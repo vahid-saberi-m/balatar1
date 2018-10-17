@@ -20,6 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
     Route::apiResource('', 'CompanyController', ['parameters' => ['' => 'company']]);
+    Route::get('users/{company}', 'CompanyController@companyUsers');
+
 });
 
 Route::group(['prefix' => 'job-post', 'as' => 'company.'], function () {

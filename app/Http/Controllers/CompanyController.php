@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CompanyRequest;
+use App\Http\Resources\UserCollection;
+use App\Models\User;
 use App\Repositories\CompanyRepository;
 use App\Tools\ApiTrait;
 use Illuminate\Http\Request;
@@ -33,6 +35,11 @@ class CompanyController extends Controller
         $this->companyRepository = $companyRepository;
 
         $this->middleware('auth:api')->only(['store', 'update','destroy']);
+    }
+
+    public function companyUsers(Company $company){
+        $this->authorizeApi('update',$company);
+        return new UserCollection($company->users);
     }
 
     /**
