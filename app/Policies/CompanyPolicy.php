@@ -45,6 +45,10 @@ class CompanyPolicy
 //        }
         return true;
     }
+    public function approval(User $user,Company $company)
+    {
+        return ($user->company_id == $company->id) &&(auth()->user()->role='admin');
+    }
 
     /**
      * Determine whether the user can update the company.

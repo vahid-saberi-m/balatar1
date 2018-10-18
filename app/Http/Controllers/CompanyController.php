@@ -36,12 +36,18 @@ class CompanyController extends Controller
     {
         $this->companyRepository = $companyRepository;
 
-        $this->middleware('auth:api')->only(['store', 'update','destroy']);
+        $this->middleware('auth:api')->except(['show']);
     }
 
     public function companyUsers(Company $company){
         $this->authorizeApi('update',$company);
         return CompanyUsersResource::collection($company->users);
+    }
+    public function userApproval(User $user)
+    {
+        $company=$user->company;
+        $this->authorizeApi('approval',$company);
+        return $this->companyRepository->userApproval($user);
     }
 
     /**

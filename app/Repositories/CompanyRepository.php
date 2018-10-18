@@ -9,7 +9,9 @@
 namespace App\Repositories;
 
 use App\Http\Resources\CompanyResource;
+use App\Http\Resources\Users\CompanyUsersResource;
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -29,6 +31,10 @@ class CompanyRepository
         }
     }
 
+    public function userApproval(User $user){
+        $user->update(['is_approved'=>!$user->is_approved]);
+        return CompanyUsersResource::collection($user->company->users);
+    }
     /**
      * @param Company $company
      * @param Request $request

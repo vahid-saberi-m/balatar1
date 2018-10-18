@@ -16,10 +16,10 @@ class CompanyUsersResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id'=>$this->id,
             'company_id'=>$this->company_id,
             'name'=>$this->name,
             'email'=>$this->email,
-            'password'=>$this->password,
             'role'=>$this->role,
             'position'=>$this->position,
             'image'=>FileRepository::getUrl($this->image),
