@@ -16,9 +16,9 @@ class UserPolicy
      * @param  \App\Models\User  $model
      * @return mixed
      */
-    public function view(User $user, User $model)
+    public function show(User $user, User $model)
     {
-        //
+        return ($user->company_id==$model->company_id)&&(($user->role=='admin')||($user->id=$model->id));
     }
 
     /**

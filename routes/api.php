@@ -70,21 +70,20 @@ Route::apiResource('packages', 'PackageController');
 Route::apiResource('package-usages', 'PackageUsageController');
 
 Route::group(['prefix' => 'application', 'as' => 'applications.'], function () {
-Route::apiResource('', 'ApplicationController', ['parameters' => ['' => 'application']]);
+    Route::apiResource('', 'ApplicationController', ['parameters' => ['' => 'application']]);
     Route::post('applied-before/{jobPost} ', 'ApplicationController@appliedBefore');
     Route::get('change-cv-folder/{application}/{cvFolder} ', 'ApplicationController@changeCvFolder');
 });
 
 Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
-Route::apiResource('', 'UserController',['parameters' => ['' => 'application']]);
-
+    Route::apiResource('', 'UserController', ['parameters' => ['' => 'user']]);
 });
 
 Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
     Route::apiResource('', 'UserController', ['parameters' => ['' => 'question']]);
-    Route::get('show','UserController@show');
-    Route::post('logout','UserController@logoutApi');
-    Route::post('/join-company/{company}','UserController@joinCompany');
+    Route::get('show', 'UserController@show');
+    Route::post('logout', 'UserController@logoutApi');
+    Route::post('/join-company/{company}', 'UserController@joinCompany');
 
 });
 

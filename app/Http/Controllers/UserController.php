@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\UserUpdateRequest;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\Company;
@@ -60,7 +61,7 @@ class UserController extends Controller
 
     public function joinCompany(Company $company, Request $request)
     {
-        return $this->userRepository->joinCompany($company,$request);
+        return $this->userRepository->joinCompany($company, $request);
 
     }
 
@@ -72,8 +73,9 @@ class UserController extends Controller
      */
     public function show()
     {
-        $user=auth()->user();
-            return new UserResource($user);
+       $user=auth()->user();
+//        $this->authorizeApi('show',$user);
+        return new UserResource($user);
 
     }
 
@@ -84,9 +86,12 @@ class UserController extends Controller
      * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
-        //
+        $this->authorizeApi('show',$user);
+        return $this->userRepository->update($user, $request);
+
+
     }
 
     /**

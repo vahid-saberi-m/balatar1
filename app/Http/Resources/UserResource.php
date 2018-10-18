@@ -24,6 +24,7 @@ class UserResource extends JsonResource
         /** @var User $user */
         $user = auth()->user();
         return [
+            'id'=>$this->id,
             'company_id'=>$this->company_id,
             'name'=>$this->name,
             'email'=>$this->email,

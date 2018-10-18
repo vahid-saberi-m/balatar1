@@ -9,7 +9,10 @@
 namespace App\Repositories;
 
 
+use App\Http\Requests\User\UserUpdateRequest;
+use App\Http\Resources\UserResource;
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -32,5 +35,15 @@ class UserRepository
             'image'=>$request->file('image')->store('users')
         ]);
         return \auth()->user();
+    }
+    public function update(User $user, Request $request)
+    {
+        if($request->file('image')){
+            $image=$request->file('image')->store('users/');
+        }else{
+            $image=$user->image;
+        }
+        $user->update([$request->all(),'image'=>$image]);
+        return new UserResource($user);
     }
 }
