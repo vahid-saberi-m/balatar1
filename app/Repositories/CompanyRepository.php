@@ -35,6 +35,10 @@ class CompanyRepository
         $user->update(['is_approved'=>!$user->is_approved]);
         return CompanyUsersResource::collection($user->company->users);
     }
+   public function disOwnUser(User $user){
+        $user->update(['company_id'=>null]);
+        return CompanyUsersResource::collection($user->company->users);
+    }
     /**
      * @param Company $company
      * @param Request $request

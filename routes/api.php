@@ -22,6 +22,7 @@ Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
     Route::apiResource('', 'CompanyController', ['parameters' => ['' => 'company']]);
     Route::get('users/{company}', 'CompanyController@companyUsers');
     Route::get('user/approval/{user}', 'CompanyController@userApproval');
+    Route::get('user/dis-own/{user}', 'CompanyController@disOwnUser');
 
 });
 

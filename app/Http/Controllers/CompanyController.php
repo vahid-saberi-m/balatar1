@@ -50,6 +50,13 @@ class CompanyController extends Controller
         return $this->companyRepository->userApproval($user);
     }
 
+    public function disOwnUser(User $user)
+    {
+        $company=$user->company;
+        $this->authorizeApi('approval',$company);
+        return $this->companyRepository->disOwnUser($user);
+    }
+
     /**
      * Display a listing of the resource.
      *\
