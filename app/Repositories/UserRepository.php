@@ -43,7 +43,7 @@ class UserRepository
         }else{
             $image=$user->image;
         }
-        $user->update([$request->all(),'image'=>$image]);
+        $user->update(array_merge($request->all(),['image'=>$image]));
         return new UserResource($user);
     }
 }
