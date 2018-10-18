@@ -75,8 +75,10 @@ Route::apiResource('', 'ApplicationController', ['parameters' => ['' => 'applica
     Route::get('change-cv-folder/{application}/{cvFolder} ', 'ApplicationController@changeCvFolder');
 });
 
+Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+Route::apiResource('', 'UserController',['parameters' => ['' => 'application']]);
 
-Route::apiResource('users ', 'UserController');
+});
 
 Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
     Route::apiResource('', 'UserController', ['parameters' => ['' => 'question']]);
