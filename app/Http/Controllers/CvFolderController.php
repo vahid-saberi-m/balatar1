@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CvFolderRequest;
+use App\Http\Resources\Application\CvFolderApplicationResource;
 use App\Http\Resources\ApplicationResource;
 use App\Http\Resources\CvFolderResource;
 use App\Models\CvFolder;
@@ -38,7 +39,7 @@ class CvFolderController extends Controller
     {
         $jobPost = $cvFolder->jobPost;
         $this->authorizeApi('isCompanyJobPost', array(JobPost::class, $jobPost));
-        return ApplicationResource::collection($cvFolder->applications()->paginate('10'));
+        return CvFolderApplicationResource::collection($cvFolder->applications()->paginate(2));
     }
 
     /**
