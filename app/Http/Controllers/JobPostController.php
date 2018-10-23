@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\JobPostRequest;
+use App\Http\Resources\JobPost\JobBoardResource;
 use App\Http\Resources\JobPostResource;
 use App\Models\JobPost;
 use App\Models\Company;
@@ -137,5 +138,9 @@ class JobPostController extends Controller
         $this->authorizeApi('delete', $jobPost);
         return $this->jobPostRepository->delete($jobPost);
 
+    }
+    public function jobBoard(JobPost $jobPost){
+        $this->authorizeApi('isCompanyJobPost', $jobPost);
+        return new JobBoardResource($jobPost);
     }
 }
