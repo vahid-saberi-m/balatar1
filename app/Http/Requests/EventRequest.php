@@ -36,7 +36,7 @@ class EventRequest extends FormRequest
                 'title' => 'required|max:150',
                 'content' => 'required|max:2000',
                 'main_photo' => 'required|file|image|between:1,2000',
-                'tags' => 'required|max:255',
+                'tags' => 'sometimes|max:255',
             ];
         }
     }

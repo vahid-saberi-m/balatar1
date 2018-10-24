@@ -20,9 +20,9 @@ class EventPolicy
      * @param  \App\Models\Event  $event
      * @return mixed
      */
-    public function view(User $user, Event $event)
+    public function hasAccess(User $user, Event $event)
     {
-        //
+        return ($user->role=='admin')&&($event->company_id==$user->company_id);
     }
 
     /**
@@ -31,9 +31,9 @@ class EventPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function store(User $user)
     {
-        //
+        return $user->role=='admin';
     }
 
     /**

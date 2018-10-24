@@ -43,7 +43,9 @@ class EventController extends Controller
      */
     public function store(EventRequest $request)
     {
+        $this->authorizeApi('store', Event::class);
         return $this->EventRepository->store($request);
+
     }
 
     /**
@@ -66,7 +68,7 @@ class EventController extends Controller
      */
     public function update(EventRequest $request, Event $event)
     {
-        $request->validated();
+        $this->authorizeApi('store', $event);
         return $this->EventRepository->update($request,$event);
     }
 
