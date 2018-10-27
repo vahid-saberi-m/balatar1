@@ -20,8 +20,9 @@ class PublicCompanyPageResource extends JsonResource
      */
     public function toArray($request)
     {
-        $jobPosts=JobPost::where('company_id' , $this->id )->get();
-        $events=Event::where('company_id',$this->id)->get();
+        $jobPosts = JobPost::where('company_id', $this->id)->where('publish_date', '<=', Carbon::now())
+            ->where('expiration_date', '>=', Carbon::now())->get();
+        $events = Event::where('company_id', $this->id)->get();
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -39,8 +40,8 @@ class PublicCompanyPageResource extends JsonResource
             'email' => $this->email,
             'phone_number' => $this->phone_number,
             'location' => $this->location,
-            'jobPosts' =>  JobPostResource::collection($jobPosts) ,
-            'events'=> EventResource::collection($events),
+            'jobPosts' => JobPostResource::collection($jobPosts),
+            'events' => EventResource::collection($events),
         ];
     }
 }
