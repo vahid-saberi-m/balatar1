@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Http\Resources\Candidate\CandidateAppliedBeforeResource;
 use App\Http\Resources\Candidate\CandidateDidNotApplyBeforeResource;
+use App\Http\Resources\Candidate\CandidateDoesNotExist;
 use App\Http\Resources\Candidate\CandidateResource;
 use App\Models\Candidate;
 use App\Models\JobPost;
@@ -23,7 +24,7 @@ class CandidateRepository
                 return new CandidateDidNotApplyBeforeResource($candidate);
             }
         }
-        return null;
+        return new CandidateDoesNotExist($request);
 
     }
 
