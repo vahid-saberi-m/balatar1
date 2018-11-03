@@ -39,7 +39,7 @@ class CvFolderController extends Controller
     {
         $jobPost = $cvFolder->jobPost;
         $this->authorizeApi('isCompanyJobPost', array(JobPost::class, $jobPost));
-        return CvFolderApplicationResource::collection($cvFolder->applications()->paginate(2));
+        return CvFolderApplicationResource::collection($cvFolder->applications()->orderByDesc('id')->paginate(5));
     }
 
     /**

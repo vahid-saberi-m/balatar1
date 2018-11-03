@@ -16,7 +16,7 @@ class JobPostCvFolderResource extends JsonResource
      */
     public function toArray($request)
     {
-        $applications=Application::where('cv_folder_id',$this->id)->paginate(2);
+        $applications=Application::where('cv_folder_id',$this->id)->orderByDesc('id')->paginate(5);
         return [
             'id'=>$this->id,
             'name'=>$this->name,
