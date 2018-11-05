@@ -22,14 +22,8 @@ class CompanyRepository
 {
     public function show(Company $company)
     {
-//        $company->load(['jobPosts' => function ($query) {
-//            $query->where('is_active', 1)->orderByDesc('id')->take(10);
-//        }]);
-        if ($company->is_live == 1) {
             return new PublicCompanyPageResource($company);
-        } else {
-            return 'امکان نمایش این صفحه وجود ندارد.';
-        }
+
     }
 
     public function userApproval(User $user){

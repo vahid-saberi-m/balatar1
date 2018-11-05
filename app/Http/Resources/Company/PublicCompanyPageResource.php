@@ -20,28 +20,35 @@ class PublicCompanyPageResource extends JsonResource
      */
     public function toArray($request)
     {
-        $jobPosts = JobPost::where('company_id', $this->id)->where('publish_date', '<=', Carbon::now())
-            ->where('expiration_date', '>=', Carbon::now())->get();
-        $events = Event::where('company_id', $this->id)->get();
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'company_size' => $this->company_size,
-            'slogan' => $this->slogan,
-            'website' => $this->website,
-            'logo' => FileRepository::getUrl($this->logo),
-            'message_title' => $this->message_title,
-            'message_content' => $this->message_content,
-            'main_photo' => FileRepository::getUrl($this->main_photo),
-            'about_us' => $this->about_us,
-            'why_us' => $this->why_us,
-            'recruiting_steps' => $this->recruiting_steps,
-            'address' => $this->address,
-            'email' => $this->email,
-            'phone_number' => $this->phone_number,
-            'location' => $this->location,
-            'jobPosts' => JobPostResource::collection($jobPosts),
-            'events' => EventResource::collection($events),
-        ];
+        if ($this->is_live) {
+            $jobPosts = JobPost::where('company_id', $this->id)->where('publish_date', '<=', Carbon::now())
+                ->where('expiration_date', '>=', Carbon::now())->get();
+            $events = Event::where('company_id', $this->id)->get();
+            return [
+                'is_live'=>$this->is_live,
+                'id' => $this->id,
+                'name' => $this->name,
+                'company_size' => $this->company_size,
+                'slogan' => $this->slogan,
+                'website' => $this->website,
+                'logo' => FileRepository::getUrl($this->logo),
+                'message_title' => $this->message_title,
+                'message_content' => $this->message_content,
+                'main_photo' => FileRepository::getUrl($this->main_photo),
+                'about_us' => $this->about_us,
+                'why_us' => $this->why_us,
+                'recruiting_steps' => $this->recruiting_steps,
+                'address' => $this->address,
+                'email' => $this->email,
+                'phone_number' => $this->phone_number,
+                'location' => $this->location,
+                'jobPosts' => JobPostResource::collection($jobPosts),
+                'events' => EventResource::collection($events),
+            ];
+        }else{
+            return[
+                'is_live'=>$this->is_live
+            ];
+        }
     }
 }
