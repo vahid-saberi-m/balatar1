@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ApplicationRequest;
 use App\Models\Application;
 use App\Models\Candidate;
+use App\Models\CandidateCv;
 use App\Models\CvFolder;
 use App\Models\JobPost;
 use App\Models\User;
 use App\Repositories\ApplicationRepository;
 use Illuminate\Http\Request;
 use App\Tools\ApiTrait;
+use Illuminate\Support\Facades\Storage;
 
 class ApplicationController extends Controller
 {
@@ -19,7 +21,7 @@ class ApplicationController extends Controller
     public function __construct(ApplicationRepository $applicationRepository)
     {
         $this->applicationRepository = $applicationRepository;
-        $this->middleware('auth:api')->except(['store']);
+        $this->middleware('auth:api')->except(['store','returnCv']);
     }
     public function appliedBefore(JobPost $jobPost, Request $request)
     {
@@ -40,6 +42,11 @@ class ApplicationController extends Controller
         $this->authorizeApi('show',$application);
         return $this->applicationRepository->changeCvFolder($application,$cvFolder);
 
+    }
+    public function returnCv(CandidateCv $candidateCv)
+    {
+        return
+            Storage::get($candidateCv->cv);
     }
 
     /**
