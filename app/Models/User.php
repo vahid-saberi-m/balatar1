@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property Company company
  */
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
     use SoftDeletes;
