@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('position')->nullable();
             $table->boolean('is_approved')->nullable();
             $table->string('image')->nullable();
+            $table->dateTime('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
