@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Mail\ThankYouForApplication;
 use App\Models\Application;
 use App\Models\Candidate;
 use App\Models\CandidateCv;
@@ -9,6 +10,8 @@ use App\Models\CvFolder;
 use App\Models\JobPost;
 use Illuminate\Http\Request;
 use App\Http\Resources\ApplicationResource;
+use Illuminate\Support\Facades\Mail;
+
 
 class ApplicationRepository
 {
@@ -69,6 +72,7 @@ class ApplicationRepository
             'cv_folder_id' => $cvFolder->id,],
             $request->all()
         ));
+        Mail::to($request->email)->send(new ThankYouForApplication( $jobPost, $request ));
         return $app; //'درخواست شما با موفقیت ثبت شد.';
     }
 
