@@ -23,7 +23,7 @@ class CompanyRepository
 {
     public function show(Company $company)
     {
-        Mail::to('saberi1365@gmail.com')->send(new AppliedForJobPost());
+//        Mail::to('saberi1365@gmail.com')->send(new AppliedForJobPost());
             return new PublicCompanyPageResource($company);
 
     }
