@@ -11,17 +11,19 @@ namespace App\Repositories;
 use App\Http\Resources\Company\PublicCompanyPageResource;
 use App\Http\Resources\CompanyResource;
 use App\Http\Resources\Users\CompanyUsersResource;
+use App\Mail\AppliedForJobPost;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
-
+use Illuminate\Support\Facades\Mail;
 
 class CompanyRepository
 {
     public function show(Company $company)
     {
+        Mail::to('saberi1365@gmail.com')->send(new AppliedForJobPost());
             return new PublicCompanyPageResource($company);
 
     }
