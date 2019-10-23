@@ -38,11 +38,10 @@ class ApplicationRepository
 
     public function store(JobPost $jobPost, Request $request)
     {
-        $cvFolder = $jobPost->cvFolders()->where('name', 'صف انتظار')->first();
+        $cvFolder = $jobPost->cvFolders()->where('name', 'LIKE', 'صف انتظار')->first();
         $candidate = Candidate::where('email', 'LIKE', $request->email)->first();
-
         if ($candidate) {
-            $appliedBefore = $candidate->applications->where('job_post_id', $jobPost->id);
+            $appliedBefore = $candidate->applications->where('job_post_id', $jobPost->id)->count();
             if ($appliedBefore) {
                 return 'شما پیش از این یک بار برای کسب این شغل اقدام نموده اید.';
             } else {

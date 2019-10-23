@@ -18,7 +18,7 @@ class CvFolderRepository
 {
     public function CreateJobPostCvFolders(JobPost $jobPost)
     {
-        $cvFolderNames=['مردود','در صف انتظار','قابل تامل','دعوت به مصاحبه'];
+        $cvFolderNames=['مردود','صف انتظار','قابل تامل','دعوت به مصاحبه'];
         foreach ($cvFolderNames as $cvFolderName){
             CvFolder::create([
                 'name'=>$cvFolderName,
