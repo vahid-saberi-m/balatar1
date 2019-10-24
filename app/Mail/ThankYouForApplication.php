@@ -18,9 +18,9 @@ class ThankYouForApplication extends Mailable
      *
      * @return void
      */
-    public function __construct($jobPost,$request)
+    public function __construct(JobPost $jobPost,Request $request)
     {
-        //
+        $this->jobPost = $jobPost;
     }
 
     /**
@@ -28,9 +28,9 @@ class ThankYouForApplication extends Mailable
      *
      * @return $this
      */
-    public function build(JobPost $jobPost, $request)
+    public function build(JobPost $jobPost, Request $request)
     {
-        return $this->from($jobPost->user()->email, $jobPost->user()->name)
+        return $this->from($jobPost->user->email, $jobPost->user->name)
             ->subject('تشکر')
             ->markdown('mails.exmpl')
             ->with([
