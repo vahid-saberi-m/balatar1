@@ -18,9 +18,12 @@ class ThankYouForApplication extends Mailable
      *
      * @return void
      */
+    protected $jobPost;
+    protected $request;
     public function __construct(JobPost $jobPost,Request $request)
     {
         $this->jobPost = $jobPost;
+        $this->request = $request;
     }
 
     /**
@@ -28,13 +31,13 @@ class ThankYouForApplication extends Mailable
      *
      * @return $this
      */
-    public function build(JobPost $jobPost, Request $request)
+    public function build()
     {
-        return $this->from($jobPost->user->email, $jobPost->user->name)
-            ->subject('تشکر')
+        return $this->from($this->jobPost->user->email, $this->jobPost->user->name)
+            ->subject('دریافت رزومه')
             ->markdown('mails.exmpl')
             ->with([
-                'name' => 'New Mailtrap User',
+                'name' => $this->request->name,
                 'link' => 'https://mailtrap.io/inboxes'
             ]);
     }
