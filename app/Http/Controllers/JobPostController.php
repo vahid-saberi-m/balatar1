@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\JobPost\AddEmailTemplateRequest;
 use App\Http\Requests\JobPostRequest;
 use App\Http\Resources\JobPost\JobBoardResource;
 use App\Http\Resources\JobPostResource;
@@ -34,6 +35,13 @@ class JobPostController extends Controller
     public function indexPublic(Company $company)
     {
         return $this->jobPostRepository->indexPubic($company);
+    }
+
+    public function addEmailTemplate(AddEmailTemplateRequest $request,JobPost $jobPost)
+    {
+
+        $this->authorizeApi('isCompanyJobPost', JobPost::class, $jobPost);
+        return $this->jobPostRepository->addEmailTemplate($request, $jobPost);
     }
 
     /**

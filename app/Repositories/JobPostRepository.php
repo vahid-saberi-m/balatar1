@@ -42,6 +42,9 @@ class JobPostRepository
             return 'no application';
         }
     }
+    public function addEmailTemplate( $request,JobPost $jobPost){
+        $jobPost->update(['email_template'=> $request->email_template]);
+    }
     /**
      * @param $company
      */

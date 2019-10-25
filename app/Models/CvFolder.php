@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int user_id
  * @property int company_id
  * @property int job_post_id
+ * @property Text email_template
  */
 class CvFolder extends Model
 {
@@ -23,7 +24,8 @@ class CvFolder extends Model
         'name',
         'user_id',
         'job_post_id',
-        'company_id'
+        'company_id',
+        'email_template'
     ];
 
     public function users(){
