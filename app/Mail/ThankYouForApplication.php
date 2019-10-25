@@ -33,12 +33,13 @@ class ThankYouForApplication extends Mailable
      */
     public function build()
     {
-        return $this->from($this->jobPost->user->email, $this->jobPost->user->name)
+//        dd($this->jobPost->user->email, $this->jobPost->user->name);
+            return $this->from('no-reply@bala-tar.com', $this->jobPost->user->name)
             ->subject('دریافت رزومه')
-            ->markdown('mails.exmpl')
+            ->markdown('mails.thankYouForApplication')
             ->with([
+                'company'=> $this->jobPost->company->name,
                 'name' => $this->request->name,
-                'link' => 'https://mailtrap.io/inboxes'
             ]);
     }
 }
