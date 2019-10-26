@@ -4,6 +4,7 @@ namespace App\Http\Resources\JobPost;
 
 use App\Http\Resources\CvFolder\JobPostCvFolderResource;
 use App\Models\CvFolder;
+use App\Models\JobPost;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class JobBoardResource extends JsonResource
@@ -18,6 +19,7 @@ class JobBoardResource extends JsonResource
     {
         $cvFolders=CvFolder::where('job_post_id',$this->id)->get();
         return[
+            'email_template'=> $cvFolders->first()->jobPost->email_template,
             'cv_folders'=>  JobPostCvFolderResource::collection($cvFolders)
         ];
     }

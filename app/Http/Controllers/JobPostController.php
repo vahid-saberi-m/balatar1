@@ -37,10 +37,10 @@ class JobPostController extends Controller
         return $this->jobPostRepository->indexPubic($company);
     }
 
-    public function addEmailTemplate(AddEmailTemplateRequest $request,JobPost $jobPost)
+    public function addEmailTemplate(JobPost $jobPost,Request $request)
     {
+        $this->authorizeApi('isCompanyJobPost', $jobPost);
 
-        $this->authorizeApi('isCompanyJobPost', JobPost::class, $jobPost);
         return $this->jobPostRepository->addEmailTemplate($request, $jobPost);
     }
 

@@ -24,7 +24,7 @@ class AddEmailTemplateRequest extends FormRequest
     public function rules()
     {
         return [
-            'template' => 'required|max:1000|',
+            'email_template' => 'required|max:1000|',
         ];
     }
 }
