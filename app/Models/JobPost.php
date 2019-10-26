@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Date publish_date
  * @property int cv_views
  * @property boolean is_active
+ * @property boolean email_template
 
  *
  */
@@ -46,7 +47,8 @@ class JobPost extends Model
         'publish_date',
         'expiration_date',
         'cv_views',
-        'is_active'
+        'is_active',
+        'email_template'
     ];
 
     public function user()

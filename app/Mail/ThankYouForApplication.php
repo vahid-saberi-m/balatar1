@@ -1,5 +1,6 @@
 <?php
 namespace App\Mail;
+
 use App\Models\CvFolder;
 use App\Models\JobPost;
 use Illuminate\Http\Request;
@@ -29,14 +30,16 @@ class ThankYouForApplication extends Mailable
      */
     public function build()
     {
+
+//        dd(strlen($this->cvFolder->email_template));
         if(empty($this->jobPost->email_template)){
             return $this->from('no-reply@bala-tar.com', $this->jobPost->user->name)
-                ->subject('دریافت رزومه')
-                ->markdown('mails.thankYouForApplication')
-                ->with([
-                    'company'=> $this->jobPost->company->name,
-                    'name' => $this->request->name,
-                ]);
+            ->subject('دریافت رزومه')
+            ->markdown('mails.thankYouForApplication')
+            ->with([
+                'company'=> $this->jobPost->company->name,
+                'name' => $this->request->name,
+            ]);
         }
         if(!empty($this->jobPost->email_template)){
             $content= str_replace(['{{name}}','{{company}}'], [$this->request->name,$this->jobPost->company->name], $this->jobPost->email_template);

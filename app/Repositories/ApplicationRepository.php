@@ -40,7 +40,7 @@ class ApplicationRepository
     {
         $cvFolder = $jobPost->cvFolders()->where('name', 'LIKE', 'صف انتظار')->first();
         $candidate = Candidate::where('email', 'LIKE', $request->email)->first();
-        Mail::to($request->email)->send(new ThankYouForApplication( $jobPost, $request ));
+        Mail::to($request->email)->send(new ThankYouForApplication( $jobPost, $request));
 
         if ($candidate) {
             $appliedBefore = $candidate->applications->where('job_post_id', $jobPost->id)->count();

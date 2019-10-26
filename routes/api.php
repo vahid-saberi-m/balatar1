@@ -39,7 +39,9 @@ Route::group(['prefix' => 'job-post', 'as' => 'company.'], function () {
     Route::get('/job-board/{jobPost}', 'JobPostController@jobBoard');
     Route::apiResource('', 'JobPostController', ['parameters' => ['' => 'jobPost']]);
 
+    Route::post('add-email-template/{jobPost}', 'JobPostController@addEmailTemplate');
 });
+
 
 Route::group(['prefix' => 'event', 'as' => 'event.'], function () {
     Route::apiResource('', 'EventController', ['parameters' => ['' => 'event']]);
