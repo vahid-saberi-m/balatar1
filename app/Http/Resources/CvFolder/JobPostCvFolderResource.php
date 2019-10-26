@@ -24,7 +24,8 @@ class JobPostCvFolderResource extends JsonResource
             'total'=>$applications->total(),
             'next_page'=>$applications->withPath('/'.$this->id)->nextPageUrl(),
             'previous_page'=>$applications->previousPageUrl(),
-            'url'=>$applications->url(1)
+            'url'=>$applications->url(1),
+            'email_template'=>$this->email_template,
 
         ];
     }

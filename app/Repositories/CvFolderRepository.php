@@ -39,6 +39,12 @@ class CvFolderRepository
         ]);
       return $cvFolder->name;
     }
+    public function updateEmailTemplate(Request $request,CvFolder $cvFolder){
+      $cvFolder->update(['email_template'=>$request->email_template]);
+      dd($cvFolder);
+      return $cvFolder->email_template;
+    }
+
 
 
 }

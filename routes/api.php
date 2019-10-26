@@ -52,7 +52,9 @@ Route::group(['prefix' => 'cv-folder', 'as' => 'cvFolder.'], function () {
     Route::apiResource('', 'CvFolderController', ['parameters' => ['' => 'cvFolder']]);
     Route::get('job-post/{jobPost}', 'CvFolderController@jobPostCvFolders');
     Route::post('store/{jobPost}', 'CvFolderController@store');
+    Route::post('email-template/{cvFolder}', 'CvFolderController@updateEmailTemplate');
     Route::get('applications/{cvFolder} ', 'CvFolderController@cvFolderApplications');
+    Route::get('email-template/{cvFolder} ', 'CvFolderController@showEmailTemplate');
 });
 
 Route::group(['prefix' => 'candidate', 'as' => 'candidate.'], function () {

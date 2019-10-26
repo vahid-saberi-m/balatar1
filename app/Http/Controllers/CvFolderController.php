@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CvFolder\CvFolderChangeEmailTemplateRequest;
 use App\Http\Requests\CvFolderRequest;
 use App\Http\Resources\Application\CvFolderApplicationResource;
 use App\Http\Resources\ApplicationResource;
+use App\Http\Resources\CvFolder\CvFolderEmailTemplateResource;
 use App\Http\Resources\CvFolderResource;
 use App\Models\CvFolder;
 use App\Models\JobPost;
@@ -62,6 +64,17 @@ class CvFolderController extends Controller
     {
         $this->authorizeApi('isCompanyJobPost', $jobPost);
         return $this->CvFolderRepository->store($request, $jobPost);
+    }
+
+    public function updateEmailTemplate(CvFolderChangeEmailTemplateRequest $request, CvFolder $cvFolder)
+    {
+        $this->authorizeApi('isCompanyJobPost', $cvFolder->jobPost);
+        return $this->CvFolderRepository->updateEmailTemplate($request, $cvFolder);
+    }
+    public function showEmailTemplate( CvFolder $cvFolder)
+    {
+        $this->authorizeApi('isCompanyJobPost', $cvFolder->jobPost);
+        return new CvFolderEmailTemplateResource( $cvFolder);
     }
 
     /**
