@@ -59,6 +59,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Models\JobPost');
     }
 
+    public function applicationComments()
+    {
+        return $this->hasMany('App\Models\ApplicationComment');
+    }
+
     public function company()
     {
         return $this->belongsTo('App\Models\Company');
