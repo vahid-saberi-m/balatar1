@@ -92,6 +92,10 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
     Route::post('/join-company/{company}', 'UserController@joinCompany');
 
 });
+Route::group(['prefix' => 'comment', 'as' => 'comment.'], function () {
+    Route::apiResource('', 'CommentController', ['parameters' => ['' => 'comment']]);
+    Route::post('/{application}', 'CommentController@store');
+});
 
 
 
