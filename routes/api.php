@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
-    Route::apiResource('', 'CompanyController', ['parameters' => ['' => 'company']]);
+    Route::apiResource('', 'CompanyController', ['parameters' => ['' => 'company']])->middleware('verified', ['except' => ['index','show']]);
     Route::get('users/{company}', 'CompanyController@companyUsers');
     Route::get('user/approval/{user}', 'CompanyController@userApproval');
     Route::get('user/dis-own/{user}', 'CompanyController@disOwnUser');

@@ -52,11 +52,13 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        return User::create([
+        $user= User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
         ]);
+        $user->sendEmailVerificationNotification();
+        return $user;
     }
 
     public function joinCompany(Company $company, Request $request)
