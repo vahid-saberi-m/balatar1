@@ -30,6 +30,8 @@ class ApplicationResource extends JsonResource
             'university' => $this->university,
             'cv_folder_id' => $this->cv_folder_id,
             'cv' => route('applications.cvShow', ['candidateCv' => $this->candidate_cv]),
+            'comments'=>  new ApplicationCommentsResource($this->applicationComments)
+
         ];
     }
 }

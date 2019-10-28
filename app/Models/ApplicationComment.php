@@ -1,10 +1,16 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+/**
+ * Class ApplicationComment
 
+ * @property 'user_id'
+ * @property 'application_id'
+ * @property 'content'
+ */
 class ApplicationComment extends Model
 {
     use SoftDeletes;
