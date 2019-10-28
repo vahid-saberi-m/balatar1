@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Mail\CvFolderMail;
 use App\Mail\ThankYouForApplication;
 use App\Models\Application;
 use App\Models\Candidate;
@@ -93,6 +94,9 @@ class ApplicationRepository
     public function changeCvFolder(Application $application ,CvFolder $cvFolder ){
         if($application->job_post_id==$cvFolder->job_post_id) {
             $application->update(['cv_folder_id'=> $cvFolder->id]);
+            if($cvFolder->email_template){
+                Mail::to($application->candidate->email)->send(new CvFolderMail( $cvFolder, $application));
+            }
             return $application;
         }else {
             return 'error';

@@ -39,7 +39,7 @@ class ApplicationController extends Controller
     }
 
     public function changeCvFolder( Application $application, CvFolder $cvFolder){
-        $this->authorizeApi('show',$application);
+        $this->authorizeApi('changeCvFolder',$application);
         return $this->applicationRepository->changeCvFolder($application,$cvFolder);
 
     }

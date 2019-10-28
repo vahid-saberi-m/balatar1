@@ -76,7 +76,7 @@ class CompanyRepository
                 'package_id'=>1
             ]
         ));
-        auth()->user()->update(['company_id'=>$company->id,'role'=>'admin']);
+        auth()->user()->assignRole('admin');
         return new CompanyResource($company);
     }
 

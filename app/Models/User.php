@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * Class User
@@ -25,7 +26,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
+    use Notifiable, HasRoles;
     use SoftDeletes;
     use HasApiTokens, Notifiable;
     protected $dates = ['deleted_at'];
@@ -56,6 +57,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function jobPosts()
     {
         return $this->hasMany('App\Models\JobPost');
+    }
+
+    public function applicationComments()
+    {
+        return $this->hasMany('App\Models\ApplicationComment');
     }
 
     public function company()

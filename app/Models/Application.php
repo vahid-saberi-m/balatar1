@@ -58,6 +58,10 @@ class Application extends Model
     {
         return $this->belongsTo('App\Models\JobPost', 'job_post_id');
     }
+    public function applicationComments()
+    {
+        return $this->hasMany('App\Models\ApplicationComment');
+    }
 
 //    public function cvUser()
 //    {

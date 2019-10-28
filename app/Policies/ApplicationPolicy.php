@@ -21,8 +21,16 @@ class ApplicationPolicy
      */
     public function show(User $user, Application $application)
     {
+
         return ($user->company->id == $application->jobPost->company_id) &&
-            ($user->jobPosts()->find($application->job_post_id) || $user->role == 'admin');
+            ($user->jobPosts()->find($application->job_post_id) || $user->hasRole('admin'));
+    }
+
+    public function changeCvFolder(User $user, Application $application)
+    {
+
+        return ($user->company->id == $application->jobPost->company_id) &&
+            ($user->jobPosts()->find($application->job_post_id) || $user->hasRole('admin'));
     }
 
 

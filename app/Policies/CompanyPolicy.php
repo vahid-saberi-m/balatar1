@@ -47,7 +47,7 @@ class CompanyPolicy
     }
     public function approval(User $user,Company $company)
     {
-        return ($user->company_id == $company->id) &&(auth()->user()->role='admin');
+        return ($user->company_id == $company->id) &&(auth()->user()->hasRole('admin'));
     }
 
     /**
@@ -60,7 +60,7 @@ class CompanyPolicy
      */
     public function update(User $user, Company $company)
     {
-        return $user->company_id == $company->id && ($user->role == 'admin');
+        return $user->company_id == $company->id && ($user->hasRole('admin'));
     }
 
     /**
