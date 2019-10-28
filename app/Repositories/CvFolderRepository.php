@@ -7,6 +7,7 @@
  */
 namespace App\Repositories;
 
+use App\Http\Resources\CvFolder\CvFolderEmailTemplateResource;
 use App\Models\Company;
 use App\Models\CvFolder;
 use App\Models\JobPost;
@@ -41,7 +42,7 @@ class CvFolderRepository
     }
     public function updateEmailTemplate(Request $request,CvFolder $cvFolder){
       $cvFolder->update(['email_template'=>$request->email_template]);
-      return $cvFolder->email_template;
+      return new CvFolderEmailTemplateResource($cvFolder);
     }
 
 
