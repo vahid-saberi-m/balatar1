@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Application;
 use App\Models\ApplicationComment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class CommentController extends Controller
 {
@@ -36,10 +38,10 @@ class CommentController extends Controller
      */
     public function store(Request $request, Application $application)
     {
-        if (auth()->user->company_id == $application->company_id) {
+        if (auth()->user()->company_id == $application->jobPost->company_id) {
 
             $comment=ApplicationComment::create([
-                'user_id' => auth()->user->id,
+                'user_id' => auth()->user()->id,
                 'application_id' => $application->id,
                 'content' => $request->comment_content,
             ]);

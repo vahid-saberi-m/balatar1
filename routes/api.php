@@ -94,7 +94,8 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
 });
 Route::group(['prefix' => 'comment', 'as' => 'comment.'], function () {
     Route::apiResource('', 'CommentController', ['parameters' => ['' => 'comment']]);
-    Route::post('/{application}', 'CommentController@store');
+    Route::post('/store/{application}', 'CommentController@store')->middleware('auth:api');
+
 });
 
 
