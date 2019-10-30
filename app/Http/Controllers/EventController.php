@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\JobPostRequest;
-use App\Models\Event;
+use App\Models\Company\Event;
 use Illuminate\Http\Request;
 use App\Repositories\EventRepository;
-use App\Models\Company;
+use App\Models\Company\Company;
 use App\Tools\ApiTrait;
 use App\Http\Requests\EventRequest;
 

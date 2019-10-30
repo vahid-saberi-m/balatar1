@@ -46,21 +46,21 @@ class Application extends Model
 
     public function cvFolder()
     {
-        return $this->belongsTo('App\Models\CvFolder', 'cv_folder_id');
+        return $this->belongsTo('App\Models\Application\CvFolder', 'cv_folder_id');
     }
 
     public function candidate()
     {
-        return $this->belongsTo('App\Models\Candidate', 'candidate_id');
+        return $this->belongsTo('App\Models\Candidate\Candidate', 'candidate_id');
     }
 
     public function jobPost()
     {
-        return $this->belongsTo('App\Models\JobPost', 'job_post_id');
+        return $this->belongsTo('App\Models\JobPost\JobPost', 'job_post_id');
     }
     public function applicationComments()
     {
-        return $this->hasMany('App\Models\ApplicationComment');
+        return $this->hasMany('App\Models\Application\ApplicationComment');
     }
 
 //    public function cvUser()

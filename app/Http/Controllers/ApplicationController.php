@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ApplicationRequest;
-use App\Models\Application;
-use App\Models\Candidate;
-use App\Models\CandidateCv;
-use App\Models\CvFolder;
-use App\Models\JobPost;
-use App\Models\User;
+use App\Models\Application\Application;
+use App\Models\Candidate\Candidate;
+use App\Models\Candidate\CandidateCv;
+use App\Models\Application\CvFolder;
+use App\Models\JobPost\JobPost;
+use App\Models\User\User;
 use App\Repositories\ApplicationRepository;
 use Illuminate\Http\Request;
 use App\Tools\ApiTrait;

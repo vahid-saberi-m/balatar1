@@ -4,8 +4,8 @@ namespace App\Repositories;
 
 
 use App\Http\Requests\JobPostRequest;
-use App\Models\Company;
-use App\Models\JobPost;
+use App\Models\Company\Company;
+use App\Models\JobPost\JobPost;
 use Carbon\Carbon;
 
 class PackageUsageRepository

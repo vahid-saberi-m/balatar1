@@ -6,12 +6,12 @@ use App\Http\Requests\CompanyRequest;
 use App\Http\Resources\Users\CompanyUsersResource;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
-use App\Models\User;
+use App\Models\User\User;
 use App\Repositories\CompanyRepository;
 use App\Tools\ApiTrait;
 use Illuminate\Http\Request;
 use App\Http\Resources\Company as CompanyResource ;
-use App\Models\Company;
+use App\Models\Company\Company;
 
 
 

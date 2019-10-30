@@ -6,8 +6,8 @@ use App\Http\Resources\Candidate\CandidateAppliedBeforeResource;
 use App\Http\Resources\Candidate\CandidateDidNotApplyBeforeResource;
 use App\Http\Resources\Candidate\CandidateDoesNotExist;
 use App\Http\Resources\Candidate\CandidateResource;
-use App\Models\Candidate;
-use App\Models\JobPost;
+use App\Models\CandidateCandidate;
+use App\Models\JobPost\JobPost;
 use Illuminate\Http\Request;
 
 class CandidateRepository

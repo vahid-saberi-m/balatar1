@@ -32,12 +32,12 @@ class CvFolder extends Model
         return $this->belongsToMany('App\Models\User', 'cv_folder_user' );
     }
     public function jobPost(){
-        return $this->belongsTo('App\Models\JobPost');
+        return $this->belongsTo('App\Models\JobPost\JobPost');
     }
     public function company(){
-        return $this->belongsTo('App\Models\Company');
+        return $this->belongsTo('App\Models\Company\Company');
     }
     public function applications(){
-        return $this->hasMany('App\Models\Application');
+        return $this->hasMany('App\Models\Application\Application');
     }
 }

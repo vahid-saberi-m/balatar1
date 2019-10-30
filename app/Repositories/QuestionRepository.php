@@ -2,8 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Models\JobPost;
-use App\Models\Question;
+use App\Models\JobPost\JobPost;
+use App\Models\JobPost\Question;
 use Illuminate\Http\Request;
 
 class QuestionRepository

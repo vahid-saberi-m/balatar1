@@ -1,8 +1,8 @@
 <?php
 namespace App\Mail;
 
-use App\Models\CvFolder;
-use App\Models\JobPost;
+use App\Models\Application\CvFolder;
+use App\Models\JobPost\JobPost;
 use Illuminate\Http\Request;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;

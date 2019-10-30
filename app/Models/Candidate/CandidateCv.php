@@ -18,5 +18,5 @@ class CandidateCv extends Model
     protected $fillable = ['candidate_id','cv','file_name'];
 
     public function candidate(){
-        return $this->belongsTo('App\Models\Candidate', 'candidate_id');
+        return $this->belongsTo('App\Models\Candidate\Candidate', 'candidate_id');
     }}

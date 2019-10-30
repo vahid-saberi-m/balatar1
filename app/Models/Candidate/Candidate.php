@@ -36,9 +36,9 @@ class Candidate extends Model
     ];
 
     public function applications(){
-        return $this->hasMany('App\Models\Application');
+        return $this->hasMany('App\Models\Application\Application');
     }
     public function candidateCvs(){
-        return $this->hasMany('App\Models\CandidateCv','candidate_id');
+        return $this->hasMany('App\Models\Candidate\CandidateCv','candidate_id');
     }
 }

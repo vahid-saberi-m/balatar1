@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\odel;
+use App\Models;
 use Illuminate\Http\Request;
 
 class JobPostRatingFieldController extends Controller

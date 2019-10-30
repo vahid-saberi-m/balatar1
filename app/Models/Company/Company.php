@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model\Company;
+namespace App\Models\Company\Company;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -54,21 +54,21 @@ class Company extends Model
     ];
     public function package()
     {
-        return $this->belongsTo('App\Models\Package', 'package_id');
+        return $this->belongsTo('App\Models\Package\Package', 'package_id');
     }
 
     public function packageUsage()
     {
-        return $this->hasOne('App\Models\PackageUsage', 'company_id');
+        return $this->hasOne('App\Models\Package\PackageUsage', 'company_id');
     }
     public function users(){
-        return $this->hasMany('App\Models\User');
+        return $this->hasMany('App\Models\User\User');
     }
     public function jobPosts(){
-        return $this->hasMany('App\Models\JobPost', 'company_id');
+        return $this->hasMany('App\Models\JobPost\JobPost', 'company_id');
     }
     public function events()
     {
-        return $this->hasMany('App\Models\Event');
+        return $this->hasMany('App\Models\Event\Event');
     }
 }

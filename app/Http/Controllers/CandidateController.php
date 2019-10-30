@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CandidateRequest;
-use App\Models\Candidate;
-use App\Models\JobPost;
+use App\Models\Candidate\Candidate;
+use App\Models\JobPost\JobPost;
 use App\Repositories\CandidateRepository;
 use Illuminate\Http\Request;
 

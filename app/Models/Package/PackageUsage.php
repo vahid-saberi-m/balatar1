@@ -27,10 +27,10 @@ class PackageUsage extends Model
     ];
     public function company()
     {
-        return $this->belongsTo('App\Models\Company');
+        return $this->belongsTo('App\Models\Company\Company');
     }
     public function package()
     {
-        return $this->belongsTo('App\Models\Package','package_id');
+        return $this->belongsTo('App\Models\Package\Package','package_id');
     }
 }

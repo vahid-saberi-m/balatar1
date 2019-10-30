@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\CvFolder;
+use App\Models\User\User;
+use App\Models\Application\CvFolder;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CvFolderPolicy

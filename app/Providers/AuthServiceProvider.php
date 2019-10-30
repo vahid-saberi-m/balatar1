@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Company;
+use App\Models\Company\Company;
 use App\Policies\CompanyPolicy;
 use Laravel\Passport\Passport;
 use Illuminate\Support\Facades\Gate;

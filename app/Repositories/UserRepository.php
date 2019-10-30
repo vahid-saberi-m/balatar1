@@ -11,8 +11,8 @@ namespace App\Repositories;
 
 use App\Http\Requests\User\UserUpdateRequest;
 use App\Http\Resources\UserResource;
-use App\Models\Company;
-use App\Models\User;
+use App\Models\Company\Company;
+use App\Models\User\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 

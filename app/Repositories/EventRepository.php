@@ -6,9 +6,9 @@ use App\Http\Requests\EventRequest;
 use App\Http\Requests\JobPostRequest;
 use App\Http\Resources\EventCollection;
 use App\Http\Resources\EventResource;
-use App\Models\Company;
-use App\Models\Event;
-use App\Models\JobPost;
+use App\Models\Company\Company;
+use App\Models\Company\Event;
+use App\Models\JobPost\JobPost;
 use Illuminate\Http\Request;
 
 class EventRepository

@@ -33,11 +33,11 @@ class Package extends Model
         ];
     public function companies()
     {
-        return $this->hasMany('App\Models\Company');
+        return $this->hasMany('App\Models\Company\Company');
     }
 
     public function packageUsages()
     {
-        return $this->hasMany('App\Models\package_usage');
+        return $this->hasMany('App\Models\Package\package_usage');
     }
 }

@@ -39,7 +39,7 @@ class Question extends Model
     ];
     public function jobPost()
     {
-        return $this->belongsTo('App\Models\JobPost','job_post_id');
+        return $this->belongsTo('App\Models\JobPost\JobPost','job_post_id');
     }
     public function answers()
     {

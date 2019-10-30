@@ -3,7 +3,7 @@
 namespace App\Mail;
 
 use App\Models\Application;
-use App\Models\CvFolder;
+use App\Models\Application\CvFolder;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;

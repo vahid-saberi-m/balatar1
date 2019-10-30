@@ -21,10 +21,10 @@ class ApplicationComment extends Model
     ];
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'user_id');
+        return $this->belongsTo('App\Models\User\User', 'user_id');
     }
     public function application()
     {
-        return $this->belongsTo('App\Models\Candidate', 'application_id');
+        return $this->belongsTo('App\Models\Candidate\Candidate', 'application_id');
     }
 }

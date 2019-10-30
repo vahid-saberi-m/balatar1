@@ -9,9 +9,9 @@
 namespace App\Repositories;
 
 use App\Http\Resources\CvFolder\CvFolderEmailTemplateResource;
-use App\Models\Company;
-use App\Models\CvFolder;
-use App\Models\JobPost;
+use App\Models\Company\Company;
+use App\Models\Application\CvFolder;
+use App\Models\JobPost\JobPost;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 

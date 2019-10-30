@@ -4,11 +4,11 @@ namespace App\Repositories;
 
 use App\Mail\CvFolderMail;
 use App\Mail\ThankYouForApplication;
-use App\Models\Application;
-use App\Models\Candidate;
-use App\Models\CandidateCv;
-use App\Models\CvFolder;
-use App\Models\JobPost;
+use App\Models\Application\Application;
+use App\Models\Candidate\Candidate;
+use App\Models\Candidate\CandidateCv;
+use App\Models\Application\CvFolder;
+use App\Models\JobPost\JobPost;
 use Illuminate\Http\Request;
 use App\Http\Resources\ApplicationResource;
 use Illuminate\Support\Facades\Mail;

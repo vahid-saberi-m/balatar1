@@ -2,10 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\Application;
-use App\Models\CvFolder;
-use App\Models\JobPost;
-use App\Models\User;
+use App\Models\Application\Application;
+use App\Models\Application\CvFolder;
+use App\Models\JobPost\JobPost;
+use App\Models\User\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ApplicationPolicy

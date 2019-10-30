@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Models\JobPost;
-use App\Models\User;
+use App\Models\JobPost\JobPost;
+use App\Models\User\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CvFolderRequest extends FormRequest

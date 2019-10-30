@@ -2,12 +2,12 @@
 
 namespace App\Console;
 
-use App\Models\Company;
-use App\Models\PackageUsage;
+use App\Models\Company\Company;
+use App\Models\Package\PackageUsage;
 use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Models\JobPost;
+use App\Models\JobPost\JobPost;
 
 class Kernel extends ConsoleKernel
 {

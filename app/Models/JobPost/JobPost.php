@@ -53,22 +53,22 @@ class JobPost extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User\User');
     }
     public function company()
     {
-        return $this->belongsTo('App\Models\Company', 'company_id');
+        return $this->belongsTo('App\Models\Company\Company', 'company_id');
     }
     public function cvFolders()
     {
-        return $this->hasMany('App\Models\CvFolder');
+        return $this->hasMany('App\Models\Application\CvFolder');
     }
     public function applications()
     {
-        return $this->hasMany('App\Models\Application');
+        return $this->hasMany('App\Models\Application\Application');
     }
     public function questions()
     {
-        return $this->hasMany('App\Models\Question');
+        return $this->hasMany('App\Models\JobPost\Question');
     }
 }

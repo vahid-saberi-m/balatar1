@@ -31,10 +31,10 @@ class Event extends Model
     ];
     public function company()
     {
-        return $this->belongsTo('App\Models\Company','company_id');
+        return $this->belongsTo('App\Models\Company\Company','company_id');
     }
     public function eventPictures()
     {
-        return $this->hasMany('App\Models\EventPicture');
+        return $this->hasMany('App\Models\Event\EventPicture');
     }
 }

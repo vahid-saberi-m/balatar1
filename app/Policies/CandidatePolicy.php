@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\Candidate;
+use App\Models\User\User;
+use App\Models\Candidate\Candidate;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CandidatePolicy

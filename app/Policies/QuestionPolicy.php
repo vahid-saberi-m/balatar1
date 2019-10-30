@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\Question;
+use App\Models\User\User;
+use App\Models\JobPost\Question;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class QuestionPolicy

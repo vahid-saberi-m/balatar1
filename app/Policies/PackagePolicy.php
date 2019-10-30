@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\Package;
+use App\Models\User\User;
+use App\Models\Package\Package;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PackagePolicy
