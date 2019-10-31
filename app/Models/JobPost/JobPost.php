@@ -71,4 +71,12 @@ class JobPost extends Model
     {
         return $this->hasMany('App\Models\JobPost\Question');
     }
+    public function applicationRatings()
+    {
+        return $this->hasMany('App\Models\Application\ApplicationRating');
+    }
+    public function jobPostRatingField()
+    {
+        return $this->hasMany('App\Models\JobPost\JobPostRatingField');
+    }
 }

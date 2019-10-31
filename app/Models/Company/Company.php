@@ -71,4 +71,8 @@ class Company extends Model
     {
         return $this->hasMany('App\Models\Company\Event');
     }
+    public function jobPostRatingField()
+    {
+        return $this->hasMany('App\Models\JobPost\JobPostRatingField');
+    }
 }

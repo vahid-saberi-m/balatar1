@@ -62,11 +62,11 @@ class Application extends Model
     {
         return $this->hasMany('App\Models\Application\ApplicationComment');
     }
+    public function applicationRatings()
+    {
+        return $this->hasMany('App\Models\Application\ApplicationRating');
+    }
 
-//    public function cvUser()
-//    {
-//        return $this->belongsTo('App\Models\CvUser');
-//    }
 
     protected $dates = ['deleted_at'];
 }
