@@ -37,7 +37,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'company_id', 'name', 'email', 'password', 'role', 'position','image','is_approved'
+        'company_id', 'name', 'email', 'password', 'role', 'position', 'image', 'is_approved'
     ];
 
     /**
@@ -68,8 +68,15 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo('App\Models\Company\Company');
     }
-    public function OauthAccessToken(){
-        return $this->hasMany('\App\Models\User\OauthAccessToken','user_id');
+
+    public function OauthAccessToken()
+    {
+        return $this->hasMany('\App\Models\User\OauthAccessToken', 'user_id');
+    }
+
+    public function applicationRatings()
+    {
+        return $this->hasMany('\App\Models\Application\ApplicationRating');
     }
 
 }

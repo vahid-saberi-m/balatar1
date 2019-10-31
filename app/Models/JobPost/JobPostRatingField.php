@@ -34,5 +34,8 @@ class JobPostRatingField extends Model
     public function jobPost(){
         return $this->belongsTo('App\Models\JobPost\JobPost', 'job_post_id');
     }
+    public function applicationRatings(){
+        return $this->hasMany('App\Models\Application\ApplicationRating');
+    }
 
 }

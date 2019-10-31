@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Application;
+namespace App\Http\Resources\JobPost;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ApplicationRatingsResource extends JsonResource
+class JobPostRatingFieldsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

@@ -10,7 +10,7 @@ use App\Models\Candidate\CandidateCv;
 use App\Models\Application\CvFolder;
 use App\Models\JobPost\JobPost;
 use Illuminate\Http\Request;
-use App\Http\Resources\ApplicationResource;
+use App\Http\Resources\Application\ApplicationResource;
 use Illuminate\Support\Facades\Mail;
 
 

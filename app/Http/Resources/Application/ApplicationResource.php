@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Application;
 
+use App\Http\Resources\JobPost\JobPostRatingFieldsResource;
 use App\Models\Candidate\CandidateCv;
 use App\Repositories\FileRepository;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -31,6 +32,8 @@ class ApplicationResource extends JsonResource
             'cv_folder_id' => $this->cv_folder_id,
             'cv' => route('applications.cvShow', ['candidateCv' => $this->candidate_cv]),
             'comments'=>  new ApplicationCommentsResource($this->applicationComments),
+            'ratingFields'=>  new ApplicationRatingsResource($this->applicationRatings),
+            'jobPostRatingFields'=>  new JobPostRatingFieldsResource($this->jobPost->jobPostRatingFields),
 
         ];
     }
