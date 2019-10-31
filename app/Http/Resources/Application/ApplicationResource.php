@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Application;
 
 use App\Models\Candidate\CandidateCv;
 use App\Repositories\FileRepository;
@@ -30,7 +30,7 @@ class ApplicationResource extends JsonResource
             'university' => $this->university,
             'cv_folder_id' => $this->cv_folder_id,
             'cv' => route('applications.cvShow', ['candidateCv' => $this->candidate_cv]),
-            'comments'=>  new ApplicationCommentsResource($this->applicationComments)
+            'comments'=>  new ApplicationCommentsResource($this->applicationComments),
 
         ];
     }

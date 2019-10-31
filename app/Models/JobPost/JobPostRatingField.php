@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int company_id
  * @property int job_post_id
  * @property string field
- * @property boolean default
 
 
  *
@@ -27,7 +26,6 @@ class JobPostRatingField extends Model
         'company_id',
         'job_post_id',
         'field',
-        'default',
     ];
 
     public function company(){

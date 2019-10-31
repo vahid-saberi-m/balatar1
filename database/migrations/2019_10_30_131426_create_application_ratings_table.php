@@ -17,6 +17,7 @@ class CreateApplicationRatingsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('job_post_id');
             $table->unsignedInteger('application_id');
+            $table->unsignedInteger('job_post_rating_field');
             $table->tinyInteger('rate');
             $table->softDeletes();
             $table->timestamps();

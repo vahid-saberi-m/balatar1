@@ -16,12 +16,16 @@ class CreateJobPostRatingFieldsTable extends Migration
         Schema::create('job_post_rating_fields', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('company_id');
-            $table->unsignedInteger('job_post_id');
+            $table->unsignedInteger('job_post_id')->nullable();
             $table->string('field','40');
-            $table->boolean('default');
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('company_id')->references('id')->on('companies');
+            $table->foreign('job_post_id')->references('id')->on('job_posts');
+
         });
+
     }
 
     /**
