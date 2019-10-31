@@ -9,17 +9,19 @@
 namespace App\Repositories;
 
 use App\Http\Requests\JobPostRequest;
-use App\Http\Resources\ApplicationCollection;
+use App\Http\Resources\Application\ApplicationCollection;
+use App\Http\Resources\JobPost\JobPostRatingFieldsResource;
 use App\Http\Resources\JobPost\JobPostTitleCollection;
 use App\Http\Resources\JobPostCollection;
 use App\Http\Resources\JobPostResource;
 use App\Models\Company\Company;
 use App\Models\JobPost\JobPost;
+use App\Models\JobPost\JobPostRatingField;
 use App\Models\User\User;
 use App\Repositories\CvFolderRepository;
 use Carbon\Carbon;
 use function Couchbase\defaultDecoder;
-use http\Env\Request;
+use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\Array_;
 
 class JobPostRepository
@@ -181,5 +183,13 @@ class JobPostRepository
     {
         $jobPost->delete();
         return 'deleted';
+    }
+    public function addJobPostRatingFields(JobPost $jobPost, Request $request){
+        $jobPostRatingField=JobPostRatingField::create([
+            'job_post_id'=> $jobPost->id,
+            'company_id'=> $jobPost->company_id,
+            'field'=>$request->field,
+        ]);
+        return new JobPostRatingFieldsResource($jobPostRatingField);
     }
 }

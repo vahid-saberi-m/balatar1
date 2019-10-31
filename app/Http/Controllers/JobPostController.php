@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\JobPost\AddEmailTemplateRequest;
 use App\Http\Requests\JobPostRequest;
 use App\Http\Resources\JobPost\JobBoardResource;
+use App\Http\Resources\JobPost\JobPostRatingFieldsResource;
 use App\Http\Resources\JobPostResource;
 use App\Models\JobPost\JobPost;
 use App\Models\Company\Company;
+use App\Models\JobPost\JobPostRatingField;
 use App\Tools\ApiTrait;
 use Illuminate\Http\Request;
 use App\Repositories\JobPostRepository;
@@ -24,7 +26,7 @@ class JobPostController extends Controller
     public function __construct(JobPostRepository $jobPostRepository)
     {
         $this->jobPostRepository = $jobPostRepository;
-        $this->middleware('auth:api')->except(['show','indexPublic']);
+        $this->middleware('auth:api')->except(['show', 'indexPublic']);
     }
 
     /**
@@ -37,7 +39,7 @@ class JobPostController extends Controller
         return $this->jobPostRepository->indexPubic($company);
     }
 
-    public function addEmailTemplate(JobPost $jobPost,Request $request)
+    public function addEmailTemplate(JobPost $jobPost, Request $request)
     {
         $this->authorizeApi('isCompanyJobPost', $jobPost);
 
@@ -55,11 +57,13 @@ class JobPostController extends Controller
         return $this->jobPostRepository->indexUser($company);
     }
 
-    public function lastFive(){
+    public function lastFive()
+    {
 
         return $this->jobPostRepository->lastFive();
 
     }
+
     public function indexWaiting()
     {
         return $this->jobPostRepository->indexWaiting();
@@ -81,6 +85,7 @@ class JobPostController extends Controller
         $this->authorizeApi('isCompanyJobPost', $jobPost);
         return $this->jobPostRepository->jobPostApplications($jobPost);
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -114,9 +119,9 @@ class JobPostController extends Controller
      */
     public function show(JobPost $jobPost)
     {
-        if ($jobPost->is_active==1) {
+        if ($jobPost->is_active == 1) {
             return new JobPostResource($jobPost);
-        } else{
+        } else {
             return 'not active';
         }
     }
@@ -147,8 +152,30 @@ class JobPostController extends Controller
         return $this->jobPostRepository->delete($jobPost);
 
     }
-    public function jobBoard(JobPost $jobPost){
+
+    public function jobBoard(JobPost $jobPost)
+    {
         $this->authorizeApi('isCompanyJobPost', array(JobPost::class, $jobPost));
         return new JobBoardResource($jobPost);
+    }
+
+    public function jobPostRatingFields(JobPost $jobPost)
+    {
+        $this->authorizeApi('isCompanyJobPost', array(JobPost::class, $jobPost));
+        return JobPostRatingFieldsResource::collection($jobPost->jobPostRatingFields()->get());
+    }
+
+    public function addJobPostRatingFields(JobPost $jobPost, Request $request)
+    {
+
+        $this->authorizeApi('isCompanyJobPost', array(JobPost::class, $jobPost));
+        return $this->jobPostRepository->addJobPostRatingFields($jobPost, $request);
+    }
+
+    public function deleteJobPostRatingFields(JobPostRatingField $jobPostRatingField)
+    {
+        $this->authorizeApi('isCompanyJobPost', array(JobPost::class, $jobPostRatingField->jobPost));
+        $jobPostRatingField->delete();
+        return JobPostRatingFieldsResource::collection($jobPostRatingField->jobPost->jobPostRatingFields);
     }
 }

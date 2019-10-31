@@ -37,6 +37,9 @@ Route::group(['prefix' => 'job-post', 'as' => 'company.'], function () {
     Route::get('/index-expired', 'JobPostController@indexExpired');
     Route::get('/applications/{jobPost}', 'JobPostController@jobPostApplications');
     Route::get('/job-board/{jobPost}', 'JobPostController@jobBoard');
+    Route::get('/job-board/job-post-rating-fields/{jobPost}', 'JobPostController@jobPostRatingFields');
+    Route::post('/job-board/job-post-rating-fields/{jobPost}', 'JobPostController@addJobPostRatingFields');
+    Route::delete('/job-board/job-post-rating-fields/{jobPostRatingField}', 'JobPostController@deleteJobPostRatingFields');
     Route::apiResource('', 'JobPostController', ['parameters' => ['' => 'jobPost']]);
 
     Route::post('add-email-template/{jobPost}', 'JobPostController@addEmailTemplate');
