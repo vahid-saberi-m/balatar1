@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User\User;
-use App\Models\Event;
+use App\Models\Company\Event;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class EventPolicy
@@ -16,8 +16,8 @@ class EventPolicy
     /**
      * Determine whether the user can view the event.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\User\User  $user
+     * @param  \App\Models\Company\Event  $event
      * @return mixed
      */
     public function hasAccess(User $user, Event $event)
@@ -28,7 +28,7 @@ class EventPolicy
     /**
      * Determine whether the user can create events.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\User\User  $user
      * @return mixed
      */
     public function store(User $user)
@@ -39,8 +39,8 @@ class EventPolicy
     /**
      * Determine whether the user can update the event.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\User\User  $user
+     * @param  \App\Models\Company\Event  $event
      * @return mixed
      */
     public function update(User $user, Event $event)
@@ -51,8 +51,8 @@ class EventPolicy
     /**
      * Determine whether the user can delete the event.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\User\User  $user
+     * @param  \App\Models\Company\Event  $event
      * @return mixed
      */
     public function destroy(User $user, Event $event)
@@ -63,8 +63,8 @@ class EventPolicy
     /**
      * Determine whether the user can restore the event.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\User\User  $user
+     * @param  \App\Models\Company\Event  $event
      * @return mixed
      */
     public function restore(User $user, Event $event)
@@ -75,8 +75,8 @@ class EventPolicy
     /**
      * Determine whether the user can permanently delete the event.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\User\\User  $user
+     * @param  \App\Models\Company\Event  $event
      * @return mixed
      */
     public function forceDelete(User $user, Event $event)

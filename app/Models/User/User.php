@@ -51,25 +51,25 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function cvFolders()
     {
-        return $this->belongsToMany('App\Models\CvFolder', 'cv_folder_user');
+        return $this->belongsToMany('App\Models\Application\CvFolder', 'cv_folder_user');
     }
 
     public function jobPosts()
     {
-        return $this->hasMany('App\Models\JobPost');
+        return $this->hasMany('App\Models\JobPost\JobPost');
     }
 
     public function applicationComments()
     {
-        return $this->hasMany('App\Models\ApplicationComment');
+        return $this->hasMany('App\Models\Application\ApplicationComment');
     }
 
     public function company()
     {
-        return $this->belongsTo('App\Models\Company');
+        return $this->belongsTo('App\Models\Company\Company');
     }
     public function OauthAccessToken(){
-        return $this->hasMany('\App\Models\OauthAccessToken','user_id');
+        return $this->hasMany('\App\Models\User\OauthAccessToken','user_id');
     }
 
 }

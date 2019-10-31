@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Company\Company;
+namespace App\Models\Company;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -69,6 +69,6 @@ class Company extends Model
     }
     public function events()
     {
-        return $this->hasMany('App\Models\Event\Event');
+        return $this->hasMany('App\Models\Company\Event');
     }
 }

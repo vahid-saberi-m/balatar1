@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
+use App\Models\Company\Company\Company;
 use App\Models\JobPost\JobPost;
 use App\Models\User\User;
-use App\Models\Company\Company;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 

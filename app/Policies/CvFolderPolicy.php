@@ -13,8 +13,8 @@ class CvFolderPolicy
     /**
      * Determine whether the user can view the cv folder.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\CvFolder  $cvFolder
+     * @param  \App\Models\User\User  $user
+     * @param  \App\Models\Application\\CvFolder  $cvFolder
      * @return mixed
      */
     public function view(User $user, CvFolder $cvFolder)
@@ -25,7 +25,7 @@ class CvFolderPolicy
     /**
      * Determine whether the user can create cv folders.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\User\User  $user
      * @return mixed
      */
     public function create(User $user)
@@ -36,8 +36,8 @@ class CvFolderPolicy
     /**
      * Determine whether the user can update the cv folder.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\CvFolder  $cvFolder
+     * @param  \App\Models\User\User  $user
+     * @param  \App\Models\Application\\CvFolder  $cvFolder
      * @return mixed
      */
     public function update(User $user, CvFolder $cvFolder)
@@ -60,8 +60,8 @@ class CvFolderPolicy
     /**
      * Determine whether the user can restore the cv folder.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\CvFolder  $cvFolder
+     * @param  \App\Models\User\User  $user
+     * @param  \App\Models\Application\CvFolder  $cvFolder
      * @return mixed
      */
     public function restore(User $user, CvFolder $cvFolder)

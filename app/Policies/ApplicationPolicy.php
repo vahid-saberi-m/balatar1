@@ -15,7 +15,7 @@ class ApplicationPolicy
     /**
      * Determine whether the user can view the application.
      *
-     * @param  \App\Models\User $user
+     * @param  App\Models\User\User $user
      * @param  \App\Models\Application $application
      * @return mixed
      */

@@ -29,7 +29,7 @@ class CvFolder extends Model
     ];
 
     public function users(){
-        return $this->belongsToMany('App\Models\User', 'cv_folder_user' );
+        return $this->belongsToMany('App\Models\User\User', 'cv_folder_user' );
     }
     public function jobPost(){
         return $this->belongsTo('App\Models\JobPost\JobPost');
