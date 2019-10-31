@@ -14,6 +14,12 @@ class ApplicationRatingsResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+         'id'=>$this->id,
+         'user'=>$this->user->name,
+         'field'=>$this->jobPostRatingField->field,
+         'rate'=>$this->rate,
+            'created_at'=>$this->created_at
+        ];
     }
 }

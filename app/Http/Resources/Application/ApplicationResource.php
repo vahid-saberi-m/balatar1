@@ -31,8 +31,8 @@ class ApplicationResource extends JsonResource
             'university' => $this->university,
             'cv_folder_id' => $this->cv_folder_id,
             'cv' => route('applications.cvShow', ['candidateCv' => $this->candidate_cv]),
-            'comments'=>  new ApplicationCommentsResource($this->applicationComments),
-            'ratingFields'=>  new ApplicationRatingsResource($this->applicationRatings),
+            'comments'=>   ApplicationCommentsResource::collection($this->applicationComments),
+            'ratingFields'=>   ApplicationRatingsResource::collection($this->applicationRatings),
             'jobPostRatingFields'=>  new JobPostRatingFieldsResource($this->jobPost->jobPostRatingFields),
 
         ];
