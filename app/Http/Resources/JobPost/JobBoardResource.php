@@ -3,8 +3,8 @@
 namespace App\Http\Resources\JobPost;
 
 use App\Http\Resources\CvFolder\JobPostCvFolderResource;
-use App\Models\CvFolder;
-use App\Models\JobPost;
+use App\Models\Application\CvFolder;
+use App\Models\JobPost\JobPost;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class JobBoardResource extends JsonResource

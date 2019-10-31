@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Models\CandidateCv;
+use App\Models\Candidate\CandidateCv;
 use App\Repositories\FileRepository;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;

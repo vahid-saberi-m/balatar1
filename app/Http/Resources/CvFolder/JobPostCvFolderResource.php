@@ -3,7 +3,7 @@
 namespace App\Http\Resources\CvFolder;
 
 use App\Http\Resources\Application\CvFolderApplicationResource;
-use App\Models\Application;
+use App\Models\Application\Application;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class JobPostCvFolderResource extends JsonResource

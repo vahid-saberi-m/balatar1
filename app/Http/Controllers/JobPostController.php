@@ -148,7 +148,7 @@ class JobPostController extends Controller
 
     }
     public function jobBoard(JobPost $jobPost){
-        $this->authorizeApi('isCompanyJobPost', $jobPost);
+        $this->authorizeApi('isCompanyJobPost', array(JobPost::class, $jobPost));
         return new JobBoardResource($jobPost);
     }
 }

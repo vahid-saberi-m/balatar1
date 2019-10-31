@@ -17,15 +17,15 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
-        'App\Models\Company' => 'App\Policies\CompanyPolicy',
-        'App\Models\JobPost' => 'App\Policies\JobPostPolicy',
-        'App\Models\User' => 'App\Policies\UserPolicy',
-        'App\Models\Question' => 'App\Policies\QuestionPolicy',
-        'App\Models\Package' => 'App\Policies\PackagePolicy',
-        'App\Models\Event' => 'App\Policies\EventPolicy',
-        'App\Models\CvFolder' => 'App\Policies\CvFolderPolicy',
-        'App\Models\Candidate' => 'App\Policies\CandidatePolicy',
-        'App\Models\Application' => 'App\Policies\ApplicationPolicy',
+        'App\Models\Company\Company' => 'App\Policies\CompanyPolicy',
+        'App\Models\JobPost\JobPost' => 'App\Policies\JobPostPolicy',
+        'App\Models\User\User' => 'App\Policies\UserPolicy',
+        'App\Models\JobPost\Question' => 'App\Policies\QuestionPolicy',
+        'App\Models\Package\Package' => 'App\Policies\PackagePolicy',
+        'App\Models\Company\Event' => 'App\Policies\EventPolicy',
+        'App\Models\Application\CvFolder' => 'App\Policies\CvFolderPolicy',
+        'App\Models\Candidate\Candidate' => 'App\Policies\CandidatePolicy',
+        'App\Models\Application\Application' => 'App\Policies\ApplicationPolicy',
     ];
 
     /**

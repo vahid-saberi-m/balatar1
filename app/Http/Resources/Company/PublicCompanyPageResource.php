@@ -4,8 +4,8 @@ namespace App\Http\Resources\Company;
 
 use App\Http\Resources\EventResource;
 use App\Http\Resources\JobPostResource;
-use App\Models\Event;
-use App\Models\JobPost;
+use App\Models\Company\Event;
+use App\Models\JobPost\JobPost;
 use App\Repositories\FileRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;

@@ -21,7 +21,6 @@ class JobPostPolicy
 
     public function isCompanyJobPost(User $user,JobPost $jobPost)
     {
-
         return ($jobPost->company_id==$user->company_id)&&(($user->hasRole('admin'))||($user->id=$jobPost->user_id));
 
     }
