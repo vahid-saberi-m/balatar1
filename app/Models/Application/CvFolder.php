@@ -15,12 +15,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int company_id
  * @property int job_post_id
  * @property Text email_template
+ * @property int sort
  */
 class CvFolder extends Model
 {
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $fillable = [
+        'sort',
         'name',
         'user_id',
         'job_post_id',

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Class Question
  * @package App\Models
  * @property int company_id
+ * @property int sort
  * @property int job_post_id
  * @property string question
  * @property string answer_1
@@ -25,6 +26,7 @@ class Question extends Model
 {
     use SoftDeletes;
     protected $fillable = [
+        'sort',
         'company_id',
         'job_post_id',
         'question',

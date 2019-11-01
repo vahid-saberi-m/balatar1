@@ -15,6 +15,7 @@ class CreateApplicationsTable extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->increments('id');
+            $table->smallInteger('sort')->nullable();
             $table->unsignedInteger('candidate_id');
             $table->unsignedInteger('job_post_id');
             $table->boolean('is_seen');

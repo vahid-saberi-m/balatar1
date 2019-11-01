@@ -23,11 +23,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property 'degree',
  * @property 'university'
  * @property 'candidate_cv'
+ * @property 'sort'
  */
 class Application extends Model
 {
     use SoftDeletes;
     protected $fillable = [
+        'sort',
         'candidate_id',
         'job_post_id',
         'is_seen',

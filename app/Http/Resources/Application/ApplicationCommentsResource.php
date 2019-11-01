@@ -20,6 +20,7 @@ class ApplicationCommentsResource extends JsonResource
             'user'=>$this->user->name,
             'content'=> $this->content,
             'created_at'=> Carbon::parse( $this->created_at)->format('y/m/d'),
+            'ratings'=> ApplicationRatingsResource::collection($this->applicationRatings)
         ];
     }
 }

@@ -18,7 +18,6 @@ class ApplicationResource extends JsonResource
      */
     public function toArray($request)
     {
-//        dd(route('applications.cvShow',['candidateCv'=>$this->cv_id]));
         return [
             'id' => $this->id,
             'is_seen' => $this->is_seen,
@@ -31,9 +30,9 @@ class ApplicationResource extends JsonResource
             'university' => $this->university,
             'cv_folder_id' => $this->cv_folder_id,
             'cv' => route('applications.cvShow', ['candidateCv' => $this->candidate_cv]),
-            'comments'=>   ApplicationCommentsResource::collection($this->applicationComments),
-            'ratingFields'=>   ApplicationRatingsResource::collection($this->applicationRatings),
-            'jobPostRatingFields'=>  new JobPostRatingFieldsResource($this->jobPost->jobPostRatingFields),
+            'comments'=>   ApplicationCommentsResource::collection($this->applicationComments()->get()),
+            'ratingFields'=>   ApplicationRatingsResource::collection($this->applicationRatings()->get()),
+            'jobPostRatingFields' =>   JobPostRatingFieldsResource::collection($this->jobPost->jobPostRatingFields),
 
         ];
     }

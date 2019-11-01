@@ -19,7 +19,7 @@ class CreateApplicationRatingsTable extends Migration
             $table->unsignedInteger('job_post_id');
             $table->unsignedInteger('application_id');
             $table->unsignedInteger('job_post_rating_field');
-            $table->unsignedInteger('comment_id');
+            $table->unsignedInteger('application_comment_id')->nullable();
             $table->tinyInteger('rate');
             $table->softDeletes();
             $table->timestamps();
@@ -28,7 +28,7 @@ class CreateApplicationRatingsTable extends Migration
             $table->foreign('job_post_id')->references('id')->on('job_posts');
             $table->foreign('application_id')->references('id')->on('applications');
             $table->foreign('job_post_rating_field')->references('id')->on('job_post_rating_fields');
-            $table->foreign('comment_id')->references('id')->on('application_comments');
+            $table->foreign('application_comment_id')->references('id')->on('application_comments');
         });
     }
 

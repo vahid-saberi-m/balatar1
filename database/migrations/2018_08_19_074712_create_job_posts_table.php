@@ -15,6 +15,7 @@ class CreateJobPostsTable extends Migration
     {
         Schema::create('job_posts', function (Blueprint $table) {
             $table->increments('id');
+            $table->tinyInteger('sort')->nullable();
             $table->unsignedInteger('company_id');
             $table->unsignedInteger('user_id');
             $table->string('title');

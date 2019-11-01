@@ -10,11 +10,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property 'user_id'
  * @property 'application_id'
  * @property 'content'
+ * @property 'sort'
+ *
  */
 class ApplicationComment extends Model
 {
     use SoftDeletes;
     protected $fillable = [
+        'sort',
         'application_id',
         'user_id',
         'content',
@@ -26,5 +29,9 @@ class ApplicationComment extends Model
     public function application()
     {
         return $this->belongsTo('App\Models\Candidate\Candidate', 'application_id');
+    }
+    public function applicationRating()
+    {
+        return $this->hasMany('App\Models\Application\ApplicationRating');
     }
 }

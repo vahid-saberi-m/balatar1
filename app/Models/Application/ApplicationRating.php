@@ -13,8 +13,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int job_post_id
  * @property int application_id
  * @property int rate
-
-
  *
  */
 class ApplicationRating extends Model
@@ -28,16 +26,29 @@ class ApplicationRating extends Model
         'rate',
         'job_post_rating_field'
     ];
-    public function jobPost(){
+
+    public function jobPost()
+    {
         return $this->belongsTo('App\Models\JobPost\JobPost', 'job_post_id');
     }
-    public function user(){
+
+    public function user()
+    {
         return $this->belongsTo('App\Models\User\User', 'user_id');
     }
-    public function jobPostRatingField(){
+
+    public function jobPostRatingField()
+    {
         return $this->belongsTo('App\Models\JobPost\JobPostRatingField', 'job_post_rating_field');
     }
-    public function application(){
+
+    public function application()
+    {
         return $this->belongsTo('App\Models\Application\Application', 'application_id');
+    }
+
+    public function applicationComment()
+    {
+        return $this->belongsTo('App\Models\Application\ApplicationComment', 'application_comment_id');
     }
 }

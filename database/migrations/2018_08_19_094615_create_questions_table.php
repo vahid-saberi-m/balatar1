@@ -15,6 +15,7 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
+            $table->tinyInteger('sort')->nullable();
             $table->unsignedInteger('company_id');
             $table->unsignedInteger('job_post_id');
             $table->string('question','200');

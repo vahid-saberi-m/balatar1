@@ -10,6 +10,7 @@ use Illuminate\Support\Collection;
  * Class Event
  * @package App\Models
  * @property int id
+ * @property int sort
  * @property int company_id
  * @property string title
  * @property string content
@@ -23,6 +24,7 @@ class Event extends Model
 {
     use SoftDeletes;
     protected $fillable = [
+        'sort',
         'company_id',
         'title',
         'content',

@@ -15,6 +15,7 @@ class CreateCvFoldersTable extends Migration
     {
         Schema::create('cv_folders', function (Blueprint $table) {
             $table->increments('id');
+            $table->tinyInteger('sort')->nullable();
             $table->string('name');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('job_post_id');

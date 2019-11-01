@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @package App\Models
  *
  * @property int id
+ * @property int sort
  * @property int company_id
  * @property int user_id
  * @property string title
@@ -35,6 +36,7 @@ class JobPost extends Model
     protected $table = 'job_posts';
 
     protected $fillable = [
+        'sort',
         'company_id',
         'user_id',
         'title',

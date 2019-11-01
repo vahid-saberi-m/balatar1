@@ -17,7 +17,7 @@ class CreateApplicationCommentsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('application_id');
             $table->unsignedInteger('user_id');
-            $table->string('content', '280');
+            $table->string('content', '280')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
